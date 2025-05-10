@@ -2,8 +2,9 @@ from ply import lex
 
 
 # Lexer for C or C-like languages
-def tokenize(data):
-    
+def tokenize(data: str) -> lex.LexToken:
+
+    # List of reserved words
     reserved = {
         'alignas': 'ALIGNAS',
         'alignof': 'ALIGNOF',
@@ -56,13 +57,8 @@ def tokenize(data):
         'NUMBER',
         'STRINGLITERAL',
         'CHARLITERAL',
-        'PREPROCESSOR',
-        'EQUALS',
-        'PLUS',
-        'MINUS',
-        'TIMES',
-        'DIVIDE',
-        'MODULUS',
+        'LEFTSHIFTEQUALS',
+        'RIGHTSHIFTEQUALS',
         'INCREMENT',
         'DECREMENT',
         'PLUSEQUALS',
@@ -73,17 +69,23 @@ def tokenize(data):
         'ANDEQUALS',
         'OREQUALS',
         'XOREQUALS',
-        'LEFTSHIFTEQUALS',
-        'RIGHTSHIFTEQUALS',
         'ISEQUALS',
         'ISNOTEQUALS',
         'ISLESSTHAN',
         'ISGREATERTHAN',
         'ISLESSTHANEQUAL',
         'ISGREATERTHANEQUAL',
+        'ARROW',
         'AND',
         'OR',
         'NOT',
+        'PREPROCESSOR',
+        'EQUALS',
+        'PLUS',
+        'MINUS',
+        'TIMES',
+        'DIVIDE',
+        'MODULUS',
         'BITAND',
         'BITOR',
         'BITXOR',
@@ -91,9 +93,6 @@ def tokenize(data):
         'BITSHIFTLEFT',
         'BITSHIFTRIGHT',
         'CONDITIONAL',
-        'ADDRESSOF',
-        'DEREFERNCETO',
-        'ARROW',
         'SEMICOLON',
         'COLON',
         'COMMA',
@@ -106,16 +105,23 @@ def tokenize(data):
         'RSQUARE'
     ) + tuple(reserved.values())  # Add reserved words to tokens
 
+    # Regular expression for identifiers
+    def t_IDENTIFIER(t):
+        r'[A-Za-z_][A-Za-z0-9_]*'
+        t.type = reserved.get(t.value, 'IDENTIFIER')  # Check for reserved words
+        return t
+    
+    # Regular expression for numbers
+    def t_NUMBER(t):
+        r'\d+'
+        t.value = int(t.value)  # Convert to integer
+        return t
+    
+
     # Regular expression rules for simple tokens
     t_PREPROCESSOR = r'\#\s*[a-zA-Z_][a-zA-Z0-9_]*'
     t_STRINGLITERAL = r'"([^\\\"]|\\.)*"'
     t_CHARLITERAL = r"'([^\\']|\\.)*'"
-    t_EQUALS = r'='
-    t_PLUS = r'\+'
-    t_MINUS = r'-'
-    t_TIMES = r'\*'
-    t_DIVIDE = r'/'
-    t_MODULUS = r'%'
     t_INCREMENT = r'\+\+'
     t_DECREMENT = r'--'
     t_PLUSEQUALS = r'\+='
@@ -128,25 +134,29 @@ def tokenize(data):
     t_XOREQUALS = r'\^='
     t_LEFTSHIFTEQUALS = r'<<='
     t_RIGHTSHIFTEQUALS = r'>>='
-    t_ISEQUALS = r'=='
-    t_ISNOTEQUALS = r'!='
-    t_ISLESSTHAN = r'<'
-    t_ISGREATERTHAN = r'>'
     t_ISLESSTHANEQUAL = r'<='
     t_ISGREATERTHANEQUAL = r'>='
+    t_ISEQUALS = r'=='
+    t_ISNOTEQUALS = r'!='
+    t_BITSHIFTLEFT = r'<<'
+    t_BITSHIFTRIGHT = r'>>'
+    t_ARROW = r'->'
     t_AND = r'&&'
     t_OR = r'\|\|'
     t_NOT = r'!'
+    t_EQUALS = r'='
+    t_PLUS = r'\+'
+    t_MINUS = r'-'
+    t_TIMES = r'\*'
+    t_DIVIDE = r'/'
+    t_MODULUS = r'%'
+    t_ISLESSTHAN = r'<'
+    t_ISGREATERTHAN = r'>'
     t_BITAND = r'&'
     t_BITOR = r'\|'
     t_BITXOR = r'\^'
     t_BITNOT = r'~'
-    t_BITSHIFTLEFT = r'<<'
-    t_BITSHIFTRIGHT = r'>>'
     t_CONDITIONAL = r'\?'
-    t_ADDRESSOF = r'&'
-    t_DEREFERNCETO = r'\*'
-    t_ARROW = r'->'
     t_SEMICOLON = r';'
     t_COLON = r':'
     t_COMMA = r','
@@ -158,15 +168,6 @@ def tokenize(data):
     t_LSQUARE = r'\['
     t_RSQUARE = r'\]'
 
-    def t_IDENTIFIER(t):
-        r'[A-Za-z_][A-Za-z0-9_]*'
-        t.type = reserved.get(t.value, 'IDENTIFIER')  # Check for reserved words
-        return t
-
-    def t_NUMBER(t):
-        r'\d+'
-        t.value = int(t.value)  # Convert to integer
-        return t
 
     t_ignore = ' \t\n'  # Ignore spaces and tabs and newlines
 
