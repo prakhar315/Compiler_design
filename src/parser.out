@@ -1,0 +1,3630 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ALIGNAS
+    ALIGNOF
+    ANDEQUALS
+    ARROW
+    ASM
+    AUTO
+    BITAND
+    BITNOT
+    BITOR
+    BITSHIFTLEFT
+    BITSHIFTRIGHT
+    BITXOR
+    BOOL
+    BREAK
+    CASE
+    CHARLITERAL
+    COLON
+    CONDITIONAL
+    CONST
+    CONTINUE
+    DECREMENT
+    DEFAULT
+    DIVIDEEQUALS
+    DO
+    DOT
+    ENUM
+    EXTERN
+    FALSE
+    GOTO
+    INCREMENT
+    INLINE
+    LEFTSHIFTEQUALS
+    LONG
+    LSQUARE
+    MINUSEQUALS
+    MODULUSEQUALS
+    NULLPTR
+    OREQUALS
+    PLUSEQUALS
+    PREPROCESSOR
+    REGISTER
+    RESTRICT
+    RIGHTSHIFTEQUALS
+    RSQUARE
+    SHORT
+    SIGNED
+    SIZEOF
+    STATIC
+    STRINGLITERAL
+    STRUCT
+    SWITCH
+    TIMESEQUALS
+    TRUE
+    TYPEDEF
+    TYPEOF
+    UNION
+    UNSIGNED
+    VOLATILE
+    XOREQUALS
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> external_declaration
+Rule 2     program -> program external_declaration
+Rule 3     external_declaration -> function
+Rule 4     external_declaration -> declaration SEMICOLON
+Rule 5     declaration -> type IDENTIFIER
+Rule 6     declaration -> type IDENTIFIER EQUALS expression
+Rule 7     function -> type IDENTIFIER LPAREN parameter_list RPAREN LBRACE statements RBRACE
+Rule 8     parameter_list -> parameter
+Rule 9     parameter_list -> parameter_list COMMA parameter
+Rule 10    parameter_list -> empty
+Rule 11    parameter -> type IDENTIFIER
+Rule 12    type -> INT
+Rule 13    type -> VOID
+Rule 14    type -> CHAR
+Rule 15    type -> FLOAT
+Rule 16    type -> DOUBLE
+Rule 17    statements -> statement
+Rule 18    statements -> statements statement
+Rule 19    statement -> declaration SEMICOLON
+Rule 20    statement -> expression SEMICOLON
+Rule 21    statement -> if_statement
+Rule 22    statement -> while_statement
+Rule 23    statement -> for_statement
+Rule 24    statement -> return_statement
+Rule 25    statement -> block
+Rule 26    block -> LBRACE statements RBRACE
+Rule 27    if_statement -> IF LPAREN expression RPAREN statement
+Rule 28    if_statement -> IF LPAREN expression RPAREN statement ELSE statement
+Rule 29    while_statement -> WHILE LPAREN expression RPAREN statement
+Rule 30    for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement
+Rule 31    opt_expression -> expression
+Rule 32    opt_expression -> empty
+Rule 33    return_statement -> RETURN expression SEMICOLON
+Rule 34    return_statement -> RETURN SEMICOLON
+Rule 35    expression -> expression PLUS expression
+Rule 36    expression -> expression MINUS expression
+Rule 37    expression -> expression TIMES expression
+Rule 38    expression -> expression DIVIDE expression
+Rule 39    expression -> expression MODULUS expression
+Rule 40    expression -> expression ISGREATERTHAN expression
+Rule 41    expression -> expression ISLESSTHAN expression
+Rule 42    expression -> expression ISGREATERTHANEQUAL expression
+Rule 43    expression -> expression ISLESSTHANEQUAL expression
+Rule 44    expression -> expression ISEQUALS expression
+Rule 45    expression -> expression ISNOTEQUALS expression
+Rule 46    expression -> expression AND expression
+Rule 47    expression -> expression OR expression
+Rule 48    expression -> NOT expression
+Rule 49    expression -> MINUS expression
+Rule 50    expression -> LPAREN expression RPAREN
+Rule 51    expression -> NUMBER
+Rule 52    expression -> IDENTIFIER
+Rule 53    expression -> IDENTIFIER EQUALS expression
+Rule 54    expression -> IDENTIFIER LPAREN argument_list RPAREN
+Rule 55    argument_list -> expression
+Rule 56    argument_list -> argument_list COMMA expression
+Rule 57    argument_list -> empty
+Rule 58    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ALIGNAS              : 
+ALIGNOF              : 
+AND                  : 46
+ANDEQUALS            : 
+ARROW                : 
+ASM                  : 
+AUTO                 : 
+BITAND               : 
+BITNOT               : 
+BITOR                : 
+BITSHIFTLEFT         : 
+BITSHIFTRIGHT        : 
+BITXOR               : 
+BOOL                 : 
+BREAK                : 
+CASE                 : 
+CHAR                 : 14
+CHARLITERAL          : 
+COLON                : 
+COMMA                : 9 56
+CONDITIONAL          : 
+CONST                : 
+CONTINUE             : 
+DECREMENT            : 
+DEFAULT              : 
+DIVIDE               : 38
+DIVIDEEQUALS         : 
+DO                   : 
+DOT                  : 
+DOUBLE               : 16
+ELSE                 : 28
+ENUM                 : 
+EQUALS               : 6 53
+EXTERN               : 
+FALSE                : 
+FLOAT                : 15
+FOR                  : 30
+GOTO                 : 
+IDENTIFIER           : 5 6 7 11 52 53 54
+IF                   : 27 28
+INCREMENT            : 
+INLINE               : 
+INT                  : 12
+ISEQUALS             : 44
+ISGREATERTHAN        : 40
+ISGREATERTHANEQUAL   : 42
+ISLESSTHAN           : 41
+ISLESSTHANEQUAL      : 43
+ISNOTEQUALS          : 45
+LBRACE               : 7 26
+LEFTSHIFTEQUALS      : 
+LONG                 : 
+LPAREN               : 7 27 28 29 30 50 54
+LSQUARE              : 
+MINUS                : 36 49
+MINUSEQUALS          : 
+MODULUS              : 39
+MODULUSEQUALS        : 
+NOT                  : 48
+NULLPTR              : 
+NUMBER               : 51
+OR                   : 47
+OREQUALS             : 
+PLUS                 : 35
+PLUSEQUALS           : 
+PREPROCESSOR         : 
+RBRACE               : 7 26
+REGISTER             : 
+RESTRICT             : 
+RETURN               : 33 34
+RIGHTSHIFTEQUALS     : 
+RPAREN               : 7 27 28 29 30 50 54
+RSQUARE              : 
+SEMICOLON            : 4 19 20 30 30 33 34
+SHORT                : 
+SIGNED               : 
+SIZEOF               : 
+STATIC               : 
+STRINGLITERAL        : 
+STRUCT               : 
+SWITCH               : 
+TIMES                : 37
+TIMESEQUALS          : 
+TRUE                 : 
+TYPEDEF              : 
+TYPEOF               : 
+UNION                : 
+UNSIGNED             : 
+VOID                 : 13
+VOLATILE             : 
+WHILE                : 29
+XOREQUALS            : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+argument_list        : 54 56
+block                : 25
+declaration          : 4 19
+empty                : 10 32 57
+expression           : 6 20 27 28 29 31 33 35 35 36 36 37 37 38 38 39 39 40 40 41 41 42 42 43 43 44 44 45 45 46 46 47 47 48 49 50 53 55 56
+external_declaration : 1 2
+for_statement        : 23
+function             : 3
+if_statement         : 21
+opt_expression       : 30 30 30
+parameter            : 8 9
+parameter_list       : 7 9
+program              : 2 0
+return_statement     : 24
+statement            : 17 18 27 28 28 29 30
+statements           : 7 18 26
+type                 : 5 6 7 11
+while_statement      : 22
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . external_declaration
+    (2) program -> . program external_declaration
+    (3) external_declaration -> . function
+    (4) external_declaration -> . declaration SEMICOLON
+    (7) function -> . type IDENTIFIER LPAREN parameter_list RPAREN LBRACE statements RBRACE
+    (5) declaration -> . type IDENTIFIER
+    (6) declaration -> . type IDENTIFIER EQUALS expression
+    (12) type -> . INT
+    (13) type -> . VOID
+    (14) type -> . CHAR
+    (15) type -> . FLOAT
+    (16) type -> . DOUBLE
+
+    INT             shift and go to state 6
+    VOID            shift and go to state 7
+    CHAR            shift and go to state 8
+    FLOAT           shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    program                        shift and go to state 1
+    external_declaration           shift and go to state 2
+    function                       shift and go to state 3
+    declaration                    shift and go to state 4
+    type                           shift and go to state 5
+
+state 1
+
+    (0) S' -> program .
+    (2) program -> program . external_declaration
+    (3) external_declaration -> . function
+    (4) external_declaration -> . declaration SEMICOLON
+    (7) function -> . type IDENTIFIER LPAREN parameter_list RPAREN LBRACE statements RBRACE
+    (5) declaration -> . type IDENTIFIER
+    (6) declaration -> . type IDENTIFIER EQUALS expression
+    (12) type -> . INT
+    (13) type -> . VOID
+    (14) type -> . CHAR
+    (15) type -> . FLOAT
+    (16) type -> . DOUBLE
+
+    INT             shift and go to state 6
+    VOID            shift and go to state 7
+    CHAR            shift and go to state 8
+    FLOAT           shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    external_declaration           shift and go to state 11
+    function                       shift and go to state 3
+    declaration                    shift and go to state 4
+    type                           shift and go to state 5
+
+state 2
+
+    (1) program -> external_declaration .
+
+    INT             reduce using rule 1 (program -> external_declaration .)
+    VOID            reduce using rule 1 (program -> external_declaration .)
+    CHAR            reduce using rule 1 (program -> external_declaration .)
+    FLOAT           reduce using rule 1 (program -> external_declaration .)
+    DOUBLE          reduce using rule 1 (program -> external_declaration .)
+    $end            reduce using rule 1 (program -> external_declaration .)
+
+
+state 3
+
+    (3) external_declaration -> function .
+
+    INT             reduce using rule 3 (external_declaration -> function .)
+    VOID            reduce using rule 3 (external_declaration -> function .)
+    CHAR            reduce using rule 3 (external_declaration -> function .)
+    FLOAT           reduce using rule 3 (external_declaration -> function .)
+    DOUBLE          reduce using rule 3 (external_declaration -> function .)
+    $end            reduce using rule 3 (external_declaration -> function .)
+
+
+state 4
+
+    (4) external_declaration -> declaration . SEMICOLON
+
+    SEMICOLON       shift and go to state 12
+
+
+state 5
+
+    (7) function -> type . IDENTIFIER LPAREN parameter_list RPAREN LBRACE statements RBRACE
+    (5) declaration -> type . IDENTIFIER
+    (6) declaration -> type . IDENTIFIER EQUALS expression
+
+    IDENTIFIER      shift and go to state 13
+
+
+state 6
+
+    (12) type -> INT .
+
+    IDENTIFIER      reduce using rule 12 (type -> INT .)
+
+
+state 7
+
+    (13) type -> VOID .
+
+    IDENTIFIER      reduce using rule 13 (type -> VOID .)
+
+
+state 8
+
+    (14) type -> CHAR .
+
+    IDENTIFIER      reduce using rule 14 (type -> CHAR .)
+
+
+state 9
+
+    (15) type -> FLOAT .
+
+    IDENTIFIER      reduce using rule 15 (type -> FLOAT .)
+
+
+state 10
+
+    (16) type -> DOUBLE .
+
+    IDENTIFIER      reduce using rule 16 (type -> DOUBLE .)
+
+
+state 11
+
+    (2) program -> program external_declaration .
+
+    INT             reduce using rule 2 (program -> program external_declaration .)
+    VOID            reduce using rule 2 (program -> program external_declaration .)
+    CHAR            reduce using rule 2 (program -> program external_declaration .)
+    FLOAT           reduce using rule 2 (program -> program external_declaration .)
+    DOUBLE          reduce using rule 2 (program -> program external_declaration .)
+    $end            reduce using rule 2 (program -> program external_declaration .)
+
+
+state 12
+
+    (4) external_declaration -> declaration SEMICOLON .
+
+    INT             reduce using rule 4 (external_declaration -> declaration SEMICOLON .)
+    VOID            reduce using rule 4 (external_declaration -> declaration SEMICOLON .)
+    CHAR            reduce using rule 4 (external_declaration -> declaration SEMICOLON .)
+    FLOAT           reduce using rule 4 (external_declaration -> declaration SEMICOLON .)
+    DOUBLE          reduce using rule 4 (external_declaration -> declaration SEMICOLON .)
+    $end            reduce using rule 4 (external_declaration -> declaration SEMICOLON .)
+
+
+state 13
+
+    (7) function -> type IDENTIFIER . LPAREN parameter_list RPAREN LBRACE statements RBRACE
+    (5) declaration -> type IDENTIFIER .
+    (6) declaration -> type IDENTIFIER . EQUALS expression
+
+    LPAREN          shift and go to state 14
+    SEMICOLON       reduce using rule 5 (declaration -> type IDENTIFIER .)
+    EQUALS          shift and go to state 15
+
+
+state 14
+
+    (7) function -> type IDENTIFIER LPAREN . parameter_list RPAREN LBRACE statements RBRACE
+    (8) parameter_list -> . parameter
+    (9) parameter_list -> . parameter_list COMMA parameter
+    (10) parameter_list -> . empty
+    (11) parameter -> . type IDENTIFIER
+    (58) empty -> .
+    (12) type -> . INT
+    (13) type -> . VOID
+    (14) type -> . CHAR
+    (15) type -> . FLOAT
+    (16) type -> . DOUBLE
+
+    RPAREN          reduce using rule 58 (empty -> .)
+    COMMA           reduce using rule 58 (empty -> .)
+    INT             shift and go to state 6
+    VOID            shift and go to state 7
+    CHAR            shift and go to state 8
+    FLOAT           shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    type                           shift and go to state 16
+    parameter_list                 shift and go to state 17
+    parameter                      shift and go to state 18
+    empty                          shift and go to state 19
+
+state 15
+
+    (6) declaration -> type IDENTIFIER EQUALS . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 21
+
+state 16
+
+    (11) parameter -> type . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 26
+
+
+state 17
+
+    (7) function -> type IDENTIFIER LPAREN parameter_list . RPAREN LBRACE statements RBRACE
+    (9) parameter_list -> parameter_list . COMMA parameter
+
+    RPAREN          shift and go to state 27
+    COMMA           shift and go to state 28
+
+
+state 18
+
+    (8) parameter_list -> parameter .
+
+    RPAREN          reduce using rule 8 (parameter_list -> parameter .)
+    COMMA           reduce using rule 8 (parameter_list -> parameter .)
+
+
+state 19
+
+    (10) parameter_list -> empty .
+
+    RPAREN          reduce using rule 10 (parameter_list -> empty .)
+    COMMA           reduce using rule 10 (parameter_list -> empty .)
+
+
+state 20
+
+    (52) expression -> IDENTIFIER .
+    (53) expression -> IDENTIFIER . EQUALS expression
+    (54) expression -> IDENTIFIER . LPAREN argument_list RPAREN
+
+    PLUS            reduce using rule 52 (expression -> IDENTIFIER .)
+    MINUS           reduce using rule 52 (expression -> IDENTIFIER .)
+    TIMES           reduce using rule 52 (expression -> IDENTIFIER .)
+    DIVIDE          reduce using rule 52 (expression -> IDENTIFIER .)
+    MODULUS         reduce using rule 52 (expression -> IDENTIFIER .)
+    ISGREATERTHAN   reduce using rule 52 (expression -> IDENTIFIER .)
+    ISLESSTHAN      reduce using rule 52 (expression -> IDENTIFIER .)
+    ISGREATERTHANEQUAL reduce using rule 52 (expression -> IDENTIFIER .)
+    ISLESSTHANEQUAL reduce using rule 52 (expression -> IDENTIFIER .)
+    ISEQUALS        reduce using rule 52 (expression -> IDENTIFIER .)
+    ISNOTEQUALS     reduce using rule 52 (expression -> IDENTIFIER .)
+    AND             reduce using rule 52 (expression -> IDENTIFIER .)
+    OR              reduce using rule 52 (expression -> IDENTIFIER .)
+    SEMICOLON       reduce using rule 52 (expression -> IDENTIFIER .)
+    RPAREN          reduce using rule 52 (expression -> IDENTIFIER .)
+    COMMA           reduce using rule 52 (expression -> IDENTIFIER .)
+    EQUALS          shift and go to state 29
+    LPAREN          shift and go to state 30
+
+
+state 21
+
+    (6) declaration -> type IDENTIFIER EQUALS expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    SEMICOLON       reduce using rule 6 (declaration -> type IDENTIFIER EQUALS expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+    ISEQUALS        shift and go to state 40
+    ISNOTEQUALS     shift and go to state 41
+    AND             shift and go to state 42
+    OR              shift and go to state 43
+
+
+state 22
+
+    (49) expression -> MINUS . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 44
+
+state 23
+
+    (48) expression -> NOT . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 45
+
+state 24
+
+    (50) expression -> LPAREN . expression RPAREN
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 46
+
+state 25
+
+    (51) expression -> NUMBER .
+
+    PLUS            reduce using rule 51 (expression -> NUMBER .)
+    MINUS           reduce using rule 51 (expression -> NUMBER .)
+    TIMES           reduce using rule 51 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 51 (expression -> NUMBER .)
+    MODULUS         reduce using rule 51 (expression -> NUMBER .)
+    ISGREATERTHAN   reduce using rule 51 (expression -> NUMBER .)
+    ISLESSTHAN      reduce using rule 51 (expression -> NUMBER .)
+    ISGREATERTHANEQUAL reduce using rule 51 (expression -> NUMBER .)
+    ISLESSTHANEQUAL reduce using rule 51 (expression -> NUMBER .)
+    ISEQUALS        reduce using rule 51 (expression -> NUMBER .)
+    ISNOTEQUALS     reduce using rule 51 (expression -> NUMBER .)
+    AND             reduce using rule 51 (expression -> NUMBER .)
+    OR              reduce using rule 51 (expression -> NUMBER .)
+    SEMICOLON       reduce using rule 51 (expression -> NUMBER .)
+    RPAREN          reduce using rule 51 (expression -> NUMBER .)
+    COMMA           reduce using rule 51 (expression -> NUMBER .)
+
+
+state 26
+
+    (11) parameter -> type IDENTIFIER .
+
+    RPAREN          reduce using rule 11 (parameter -> type IDENTIFIER .)
+    COMMA           reduce using rule 11 (parameter -> type IDENTIFIER .)
+
+
+state 27
+
+    (7) function -> type IDENTIFIER LPAREN parameter_list RPAREN . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 47
+
+
+state 28
+
+    (9) parameter_list -> parameter_list COMMA . parameter
+    (11) parameter -> . type IDENTIFIER
+    (12) type -> . INT
+    (13) type -> . VOID
+    (14) type -> . CHAR
+    (15) type -> . FLOAT
+    (16) type -> . DOUBLE
+
+    INT             shift and go to state 6
+    VOID            shift and go to state 7
+    CHAR            shift and go to state 8
+    FLOAT           shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    parameter                      shift and go to state 48
+    type                           shift and go to state 16
+
+state 29
+
+    (53) expression -> IDENTIFIER EQUALS . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 49
+
+state 30
+
+    (54) expression -> IDENTIFIER LPAREN . argument_list RPAREN
+    (55) argument_list -> . expression
+    (56) argument_list -> . argument_list COMMA expression
+    (57) argument_list -> . empty
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+    (58) empty -> .
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+    RPAREN          reduce using rule 58 (empty -> .)
+    COMMA           reduce using rule 58 (empty -> .)
+
+    argument_list                  shift and go to state 50
+    expression                     shift and go to state 51
+    empty                          shift and go to state 52
+
+state 31
+
+    (35) expression -> expression PLUS . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 53
+
+state 32
+
+    (36) expression -> expression MINUS . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 54
+
+state 33
+
+    (37) expression -> expression TIMES . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 55
+
+state 34
+
+    (38) expression -> expression DIVIDE . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 56
+
+state 35
+
+    (39) expression -> expression MODULUS . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 57
+
+state 36
+
+    (40) expression -> expression ISGREATERTHAN . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 58
+
+state 37
+
+    (41) expression -> expression ISLESSTHAN . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 59
+
+state 38
+
+    (42) expression -> expression ISGREATERTHANEQUAL . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 60
+
+state 39
+
+    (43) expression -> expression ISLESSTHANEQUAL . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 61
+
+state 40
+
+    (44) expression -> expression ISEQUALS . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 62
+
+state 41
+
+    (45) expression -> expression ISNOTEQUALS . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 63
+
+state 42
+
+    (46) expression -> expression AND . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 64
+
+state 43
+
+    (47) expression -> expression OR . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 65
+
+state 44
+
+    (49) expression -> MINUS expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    PLUS            reduce using rule 49 (expression -> MINUS expression .)
+    MINUS           reduce using rule 49 (expression -> MINUS expression .)
+    TIMES           reduce using rule 49 (expression -> MINUS expression .)
+    DIVIDE          reduce using rule 49 (expression -> MINUS expression .)
+    MODULUS         reduce using rule 49 (expression -> MINUS expression .)
+    ISGREATERTHAN   reduce using rule 49 (expression -> MINUS expression .)
+    ISLESSTHAN      reduce using rule 49 (expression -> MINUS expression .)
+    ISGREATERTHANEQUAL reduce using rule 49 (expression -> MINUS expression .)
+    ISLESSTHANEQUAL reduce using rule 49 (expression -> MINUS expression .)
+    ISEQUALS        reduce using rule 49 (expression -> MINUS expression .)
+    ISNOTEQUALS     reduce using rule 49 (expression -> MINUS expression .)
+    AND             reduce using rule 49 (expression -> MINUS expression .)
+    OR              reduce using rule 49 (expression -> MINUS expression .)
+    SEMICOLON       reduce using rule 49 (expression -> MINUS expression .)
+    RPAREN          reduce using rule 49 (expression -> MINUS expression .)
+    COMMA           reduce using rule 49 (expression -> MINUS expression .)
+
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 32 ]
+  ! TIMES           [ shift and go to state 33 ]
+  ! DIVIDE          [ shift and go to state 34 ]
+  ! MODULUS         [ shift and go to state 35 ]
+  ! ISGREATERTHAN   [ shift and go to state 36 ]
+  ! ISLESSTHAN      [ shift and go to state 37 ]
+  ! ISGREATERTHANEQUAL [ shift and go to state 38 ]
+  ! ISLESSTHANEQUAL [ shift and go to state 39 ]
+  ! ISEQUALS        [ shift and go to state 40 ]
+  ! ISNOTEQUALS     [ shift and go to state 41 ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 45
+
+    (48) expression -> NOT expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    PLUS            reduce using rule 48 (expression -> NOT expression .)
+    MINUS           reduce using rule 48 (expression -> NOT expression .)
+    TIMES           reduce using rule 48 (expression -> NOT expression .)
+    DIVIDE          reduce using rule 48 (expression -> NOT expression .)
+    MODULUS         reduce using rule 48 (expression -> NOT expression .)
+    ISGREATERTHAN   reduce using rule 48 (expression -> NOT expression .)
+    ISLESSTHAN      reduce using rule 48 (expression -> NOT expression .)
+    ISGREATERTHANEQUAL reduce using rule 48 (expression -> NOT expression .)
+    ISLESSTHANEQUAL reduce using rule 48 (expression -> NOT expression .)
+    ISEQUALS        reduce using rule 48 (expression -> NOT expression .)
+    ISNOTEQUALS     reduce using rule 48 (expression -> NOT expression .)
+    AND             reduce using rule 48 (expression -> NOT expression .)
+    OR              reduce using rule 48 (expression -> NOT expression .)
+    SEMICOLON       reduce using rule 48 (expression -> NOT expression .)
+    RPAREN          reduce using rule 48 (expression -> NOT expression .)
+    COMMA           reduce using rule 48 (expression -> NOT expression .)
+
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 32 ]
+  ! TIMES           [ shift and go to state 33 ]
+  ! DIVIDE          [ shift and go to state 34 ]
+  ! MODULUS         [ shift and go to state 35 ]
+  ! ISGREATERTHAN   [ shift and go to state 36 ]
+  ! ISLESSTHAN      [ shift and go to state 37 ]
+  ! ISGREATERTHANEQUAL [ shift and go to state 38 ]
+  ! ISLESSTHANEQUAL [ shift and go to state 39 ]
+  ! ISEQUALS        [ shift and go to state 40 ]
+  ! ISNOTEQUALS     [ shift and go to state 41 ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 46
+
+    (50) expression -> LPAREN expression . RPAREN
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    RPAREN          shift and go to state 66
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+    ISEQUALS        shift and go to state 40
+    ISNOTEQUALS     shift and go to state 41
+    AND             shift and go to state 42
+    OR              shift and go to state 43
+
+
+state 47
+
+    (7) function -> type IDENTIFIER LPAREN parameter_list RPAREN LBRACE . statements RBRACE
+    (17) statements -> . statement
+    (18) statements -> . statements statement
+    (19) statement -> . declaration SEMICOLON
+    (20) statement -> . expression SEMICOLON
+    (21) statement -> . if_statement
+    (22) statement -> . while_statement
+    (23) statement -> . for_statement
+    (24) statement -> . return_statement
+    (25) statement -> . block
+    (5) declaration -> . type IDENTIFIER
+    (6) declaration -> . type IDENTIFIER EQUALS expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+    (27) if_statement -> . IF LPAREN expression RPAREN statement
+    (28) if_statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (29) while_statement -> . WHILE LPAREN expression RPAREN statement
+    (30) for_statement -> . FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement
+    (33) return_statement -> . RETURN expression SEMICOLON
+    (34) return_statement -> . RETURN SEMICOLON
+    (26) block -> . LBRACE statements RBRACE
+    (12) type -> . INT
+    (13) type -> . VOID
+    (14) type -> . CHAR
+    (15) type -> . FLOAT
+    (16) type -> . DOUBLE
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+    IF              shift and go to state 78
+    WHILE           shift and go to state 79
+    FOR             shift and go to state 80
+    RETURN          shift and go to state 81
+    LBRACE          shift and go to state 68
+    INT             shift and go to state 6
+    VOID            shift and go to state 7
+    CHAR            shift and go to state 8
+    FLOAT           shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    type                           shift and go to state 67
+    statements                     shift and go to state 69
+    statement                      shift and go to state 70
+    declaration                    shift and go to state 71
+    expression                     shift and go to state 72
+    if_statement                   shift and go to state 73
+    while_statement                shift and go to state 74
+    for_statement                  shift and go to state 75
+    return_statement               shift and go to state 76
+    block                          shift and go to state 77
+
+state 48
+
+    (9) parameter_list -> parameter_list COMMA parameter .
+
+    RPAREN          reduce using rule 9 (parameter_list -> parameter_list COMMA parameter .)
+    COMMA           reduce using rule 9 (parameter_list -> parameter_list COMMA parameter .)
+
+
+state 49
+
+    (53) expression -> IDENTIFIER EQUALS expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for MODULUS resolved as shift
+  ! shift/reduce conflict for ISGREATERTHAN resolved as shift
+  ! shift/reduce conflict for ISLESSTHAN resolved as shift
+  ! shift/reduce conflict for ISGREATERTHANEQUAL resolved as shift
+  ! shift/reduce conflict for ISLESSTHANEQUAL resolved as shift
+  ! shift/reduce conflict for ISEQUALS resolved as shift
+  ! shift/reduce conflict for ISNOTEQUALS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    SEMICOLON       reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .)
+    RPAREN          reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .)
+    COMMA           reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+    ISEQUALS        shift and go to state 40
+    ISNOTEQUALS     shift and go to state 41
+    AND             shift and go to state 42
+    OR              shift and go to state 43
+
+  ! PLUS            [ reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! MINUS           [ reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! TIMES           [ reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! DIVIDE          [ reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! MODULUS         [ reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! ISGREATERTHAN   [ reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! ISLESSTHAN      [ reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! ISGREATERTHANEQUAL [ reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! ISLESSTHANEQUAL [ reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! ISEQUALS        [ reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! ISNOTEQUALS     [ reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! AND             [ reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! OR              [ reduce using rule 53 (expression -> IDENTIFIER EQUALS expression .) ]
+
+
+state 50
+
+    (54) expression -> IDENTIFIER LPAREN argument_list . RPAREN
+    (56) argument_list -> argument_list . COMMA expression
+
+    RPAREN          shift and go to state 82
+    COMMA           shift and go to state 83
+
+
+state 51
+
+    (55) argument_list -> expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    RPAREN          reduce using rule 55 (argument_list -> expression .)
+    COMMA           reduce using rule 55 (argument_list -> expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+    ISEQUALS        shift and go to state 40
+    ISNOTEQUALS     shift and go to state 41
+    AND             shift and go to state 42
+    OR              shift and go to state 43
+
+
+state 52
+
+    (57) argument_list -> empty .
+
+    RPAREN          reduce using rule 57 (argument_list -> empty .)
+    COMMA           reduce using rule 57 (argument_list -> empty .)
+
+
+state 53
+
+    (35) expression -> expression PLUS expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    PLUS            reduce using rule 35 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 35 (expression -> expression PLUS expression .)
+    ISGREATERTHAN   reduce using rule 35 (expression -> expression PLUS expression .)
+    ISLESSTHAN      reduce using rule 35 (expression -> expression PLUS expression .)
+    ISGREATERTHANEQUAL reduce using rule 35 (expression -> expression PLUS expression .)
+    ISLESSTHANEQUAL reduce using rule 35 (expression -> expression PLUS expression .)
+    ISEQUALS        reduce using rule 35 (expression -> expression PLUS expression .)
+    ISNOTEQUALS     reduce using rule 35 (expression -> expression PLUS expression .)
+    AND             reduce using rule 35 (expression -> expression PLUS expression .)
+    OR              reduce using rule 35 (expression -> expression PLUS expression .)
+    SEMICOLON       reduce using rule 35 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 35 (expression -> expression PLUS expression .)
+    COMMA           reduce using rule 35 (expression -> expression PLUS expression .)
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+
+  ! TIMES           [ reduce using rule 35 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 35 (expression -> expression PLUS expression .) ]
+  ! MODULUS         [ reduce using rule 35 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 32 ]
+  ! ISGREATERTHAN   [ shift and go to state 36 ]
+  ! ISLESSTHAN      [ shift and go to state 37 ]
+  ! ISGREATERTHANEQUAL [ shift and go to state 38 ]
+  ! ISLESSTHANEQUAL [ shift and go to state 39 ]
+  ! ISEQUALS        [ shift and go to state 40 ]
+  ! ISNOTEQUALS     [ shift and go to state 41 ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 54
+
+    (36) expression -> expression MINUS expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    PLUS            reduce using rule 36 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 36 (expression -> expression MINUS expression .)
+    ISGREATERTHAN   reduce using rule 36 (expression -> expression MINUS expression .)
+    ISLESSTHAN      reduce using rule 36 (expression -> expression MINUS expression .)
+    ISGREATERTHANEQUAL reduce using rule 36 (expression -> expression MINUS expression .)
+    ISLESSTHANEQUAL reduce using rule 36 (expression -> expression MINUS expression .)
+    ISEQUALS        reduce using rule 36 (expression -> expression MINUS expression .)
+    ISNOTEQUALS     reduce using rule 36 (expression -> expression MINUS expression .)
+    AND             reduce using rule 36 (expression -> expression MINUS expression .)
+    OR              reduce using rule 36 (expression -> expression MINUS expression .)
+    SEMICOLON       reduce using rule 36 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 36 (expression -> expression MINUS expression .)
+    COMMA           reduce using rule 36 (expression -> expression MINUS expression .)
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+
+  ! TIMES           [ reduce using rule 36 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 36 (expression -> expression MINUS expression .) ]
+  ! MODULUS         [ reduce using rule 36 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 32 ]
+  ! ISGREATERTHAN   [ shift and go to state 36 ]
+  ! ISLESSTHAN      [ shift and go to state 37 ]
+  ! ISGREATERTHANEQUAL [ shift and go to state 38 ]
+  ! ISLESSTHANEQUAL [ shift and go to state 39 ]
+  ! ISEQUALS        [ shift and go to state 40 ]
+  ! ISNOTEQUALS     [ shift and go to state 41 ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 55
+
+    (37) expression -> expression TIMES expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    PLUS            reduce using rule 37 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 37 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 37 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 37 (expression -> expression TIMES expression .)
+    MODULUS         reduce using rule 37 (expression -> expression TIMES expression .)
+    ISGREATERTHAN   reduce using rule 37 (expression -> expression TIMES expression .)
+    ISLESSTHAN      reduce using rule 37 (expression -> expression TIMES expression .)
+    ISGREATERTHANEQUAL reduce using rule 37 (expression -> expression TIMES expression .)
+    ISLESSTHANEQUAL reduce using rule 37 (expression -> expression TIMES expression .)
+    ISEQUALS        reduce using rule 37 (expression -> expression TIMES expression .)
+    ISNOTEQUALS     reduce using rule 37 (expression -> expression TIMES expression .)
+    AND             reduce using rule 37 (expression -> expression TIMES expression .)
+    OR              reduce using rule 37 (expression -> expression TIMES expression .)
+    SEMICOLON       reduce using rule 37 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 37 (expression -> expression TIMES expression .)
+    COMMA           reduce using rule 37 (expression -> expression TIMES expression .)
+
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 32 ]
+  ! TIMES           [ shift and go to state 33 ]
+  ! DIVIDE          [ shift and go to state 34 ]
+  ! MODULUS         [ shift and go to state 35 ]
+  ! ISGREATERTHAN   [ shift and go to state 36 ]
+  ! ISLESSTHAN      [ shift and go to state 37 ]
+  ! ISGREATERTHANEQUAL [ shift and go to state 38 ]
+  ! ISLESSTHANEQUAL [ shift and go to state 39 ]
+  ! ISEQUALS        [ shift and go to state 40 ]
+  ! ISNOTEQUALS     [ shift and go to state 41 ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 56
+
+    (38) expression -> expression DIVIDE expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    PLUS            reduce using rule 38 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 38 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 38 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 38 (expression -> expression DIVIDE expression .)
+    MODULUS         reduce using rule 38 (expression -> expression DIVIDE expression .)
+    ISGREATERTHAN   reduce using rule 38 (expression -> expression DIVIDE expression .)
+    ISLESSTHAN      reduce using rule 38 (expression -> expression DIVIDE expression .)
+    ISGREATERTHANEQUAL reduce using rule 38 (expression -> expression DIVIDE expression .)
+    ISLESSTHANEQUAL reduce using rule 38 (expression -> expression DIVIDE expression .)
+    ISEQUALS        reduce using rule 38 (expression -> expression DIVIDE expression .)
+    ISNOTEQUALS     reduce using rule 38 (expression -> expression DIVIDE expression .)
+    AND             reduce using rule 38 (expression -> expression DIVIDE expression .)
+    OR              reduce using rule 38 (expression -> expression DIVIDE expression .)
+    SEMICOLON       reduce using rule 38 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 38 (expression -> expression DIVIDE expression .)
+    COMMA           reduce using rule 38 (expression -> expression DIVIDE expression .)
+
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 32 ]
+  ! TIMES           [ shift and go to state 33 ]
+  ! DIVIDE          [ shift and go to state 34 ]
+  ! MODULUS         [ shift and go to state 35 ]
+  ! ISGREATERTHAN   [ shift and go to state 36 ]
+  ! ISLESSTHAN      [ shift and go to state 37 ]
+  ! ISGREATERTHANEQUAL [ shift and go to state 38 ]
+  ! ISLESSTHANEQUAL [ shift and go to state 39 ]
+  ! ISEQUALS        [ shift and go to state 40 ]
+  ! ISNOTEQUALS     [ shift and go to state 41 ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 57
+
+    (39) expression -> expression MODULUS expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    PLUS            reduce using rule 39 (expression -> expression MODULUS expression .)
+    MINUS           reduce using rule 39 (expression -> expression MODULUS expression .)
+    TIMES           reduce using rule 39 (expression -> expression MODULUS expression .)
+    DIVIDE          reduce using rule 39 (expression -> expression MODULUS expression .)
+    MODULUS         reduce using rule 39 (expression -> expression MODULUS expression .)
+    ISGREATERTHAN   reduce using rule 39 (expression -> expression MODULUS expression .)
+    ISLESSTHAN      reduce using rule 39 (expression -> expression MODULUS expression .)
+    ISGREATERTHANEQUAL reduce using rule 39 (expression -> expression MODULUS expression .)
+    ISLESSTHANEQUAL reduce using rule 39 (expression -> expression MODULUS expression .)
+    ISEQUALS        reduce using rule 39 (expression -> expression MODULUS expression .)
+    ISNOTEQUALS     reduce using rule 39 (expression -> expression MODULUS expression .)
+    AND             reduce using rule 39 (expression -> expression MODULUS expression .)
+    OR              reduce using rule 39 (expression -> expression MODULUS expression .)
+    SEMICOLON       reduce using rule 39 (expression -> expression MODULUS expression .)
+    RPAREN          reduce using rule 39 (expression -> expression MODULUS expression .)
+    COMMA           reduce using rule 39 (expression -> expression MODULUS expression .)
+
+  ! PLUS            [ shift and go to state 31 ]
+  ! MINUS           [ shift and go to state 32 ]
+  ! TIMES           [ shift and go to state 33 ]
+  ! DIVIDE          [ shift and go to state 34 ]
+  ! MODULUS         [ shift and go to state 35 ]
+  ! ISGREATERTHAN   [ shift and go to state 36 ]
+  ! ISLESSTHAN      [ shift and go to state 37 ]
+  ! ISGREATERTHANEQUAL [ shift and go to state 38 ]
+  ! ISLESSTHANEQUAL [ shift and go to state 39 ]
+  ! ISEQUALS        [ shift and go to state 40 ]
+  ! ISNOTEQUALS     [ shift and go to state 41 ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 58
+
+    (40) expression -> expression ISGREATERTHAN expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    ISGREATERTHAN   reduce using rule 40 (expression -> expression ISGREATERTHAN expression .)
+    ISLESSTHAN      reduce using rule 40 (expression -> expression ISGREATERTHAN expression .)
+    ISGREATERTHANEQUAL reduce using rule 40 (expression -> expression ISGREATERTHAN expression .)
+    ISLESSTHANEQUAL reduce using rule 40 (expression -> expression ISGREATERTHAN expression .)
+    ISEQUALS        reduce using rule 40 (expression -> expression ISGREATERTHAN expression .)
+    ISNOTEQUALS     reduce using rule 40 (expression -> expression ISGREATERTHAN expression .)
+    AND             reduce using rule 40 (expression -> expression ISGREATERTHAN expression .)
+    OR              reduce using rule 40 (expression -> expression ISGREATERTHAN expression .)
+    SEMICOLON       reduce using rule 40 (expression -> expression ISGREATERTHAN expression .)
+    RPAREN          reduce using rule 40 (expression -> expression ISGREATERTHAN expression .)
+    COMMA           reduce using rule 40 (expression -> expression ISGREATERTHAN expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+
+  ! PLUS            [ reduce using rule 40 (expression -> expression ISGREATERTHAN expression .) ]
+  ! MINUS           [ reduce using rule 40 (expression -> expression ISGREATERTHAN expression .) ]
+  ! TIMES           [ reduce using rule 40 (expression -> expression ISGREATERTHAN expression .) ]
+  ! DIVIDE          [ reduce using rule 40 (expression -> expression ISGREATERTHAN expression .) ]
+  ! MODULUS         [ reduce using rule 40 (expression -> expression ISGREATERTHAN expression .) ]
+  ! ISGREATERTHAN   [ shift and go to state 36 ]
+  ! ISLESSTHAN      [ shift and go to state 37 ]
+  ! ISGREATERTHANEQUAL [ shift and go to state 38 ]
+  ! ISLESSTHANEQUAL [ shift and go to state 39 ]
+  ! ISEQUALS        [ shift and go to state 40 ]
+  ! ISNOTEQUALS     [ shift and go to state 41 ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 59
+
+    (41) expression -> expression ISLESSTHAN expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    ISGREATERTHAN   reduce using rule 41 (expression -> expression ISLESSTHAN expression .)
+    ISLESSTHAN      reduce using rule 41 (expression -> expression ISLESSTHAN expression .)
+    ISGREATERTHANEQUAL reduce using rule 41 (expression -> expression ISLESSTHAN expression .)
+    ISLESSTHANEQUAL reduce using rule 41 (expression -> expression ISLESSTHAN expression .)
+    ISEQUALS        reduce using rule 41 (expression -> expression ISLESSTHAN expression .)
+    ISNOTEQUALS     reduce using rule 41 (expression -> expression ISLESSTHAN expression .)
+    AND             reduce using rule 41 (expression -> expression ISLESSTHAN expression .)
+    OR              reduce using rule 41 (expression -> expression ISLESSTHAN expression .)
+    SEMICOLON       reduce using rule 41 (expression -> expression ISLESSTHAN expression .)
+    RPAREN          reduce using rule 41 (expression -> expression ISLESSTHAN expression .)
+    COMMA           reduce using rule 41 (expression -> expression ISLESSTHAN expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+
+  ! PLUS            [ reduce using rule 41 (expression -> expression ISLESSTHAN expression .) ]
+  ! MINUS           [ reduce using rule 41 (expression -> expression ISLESSTHAN expression .) ]
+  ! TIMES           [ reduce using rule 41 (expression -> expression ISLESSTHAN expression .) ]
+  ! DIVIDE          [ reduce using rule 41 (expression -> expression ISLESSTHAN expression .) ]
+  ! MODULUS         [ reduce using rule 41 (expression -> expression ISLESSTHAN expression .) ]
+  ! ISGREATERTHAN   [ shift and go to state 36 ]
+  ! ISLESSTHAN      [ shift and go to state 37 ]
+  ! ISGREATERTHANEQUAL [ shift and go to state 38 ]
+  ! ISLESSTHANEQUAL [ shift and go to state 39 ]
+  ! ISEQUALS        [ shift and go to state 40 ]
+  ! ISNOTEQUALS     [ shift and go to state 41 ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 60
+
+    (42) expression -> expression ISGREATERTHANEQUAL expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    ISGREATERTHAN   reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .)
+    ISLESSTHAN      reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .)
+    ISGREATERTHANEQUAL reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .)
+    ISLESSTHANEQUAL reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .)
+    ISEQUALS        reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .)
+    ISNOTEQUALS     reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .)
+    AND             reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .)
+    OR              reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .)
+    SEMICOLON       reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .)
+    RPAREN          reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .)
+    COMMA           reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+
+  ! PLUS            [ reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .) ]
+  ! MINUS           [ reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .) ]
+  ! TIMES           [ reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .) ]
+  ! DIVIDE          [ reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .) ]
+  ! MODULUS         [ reduce using rule 42 (expression -> expression ISGREATERTHANEQUAL expression .) ]
+  ! ISGREATERTHAN   [ shift and go to state 36 ]
+  ! ISLESSTHAN      [ shift and go to state 37 ]
+  ! ISGREATERTHANEQUAL [ shift and go to state 38 ]
+  ! ISLESSTHANEQUAL [ shift and go to state 39 ]
+  ! ISEQUALS        [ shift and go to state 40 ]
+  ! ISNOTEQUALS     [ shift and go to state 41 ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 61
+
+    (43) expression -> expression ISLESSTHANEQUAL expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    ISGREATERTHAN   reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .)
+    ISLESSTHAN      reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .)
+    ISGREATERTHANEQUAL reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .)
+    ISLESSTHANEQUAL reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .)
+    ISEQUALS        reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .)
+    ISNOTEQUALS     reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .)
+    AND             reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .)
+    OR              reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .)
+    SEMICOLON       reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .)
+    RPAREN          reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .)
+    COMMA           reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+
+  ! PLUS            [ reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .) ]
+  ! MINUS           [ reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .) ]
+  ! TIMES           [ reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .) ]
+  ! DIVIDE          [ reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .) ]
+  ! MODULUS         [ reduce using rule 43 (expression -> expression ISLESSTHANEQUAL expression .) ]
+  ! ISGREATERTHAN   [ shift and go to state 36 ]
+  ! ISLESSTHAN      [ shift and go to state 37 ]
+  ! ISGREATERTHANEQUAL [ shift and go to state 38 ]
+  ! ISLESSTHANEQUAL [ shift and go to state 39 ]
+  ! ISEQUALS        [ shift and go to state 40 ]
+  ! ISNOTEQUALS     [ shift and go to state 41 ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 62
+
+    (44) expression -> expression ISEQUALS expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    ISEQUALS        reduce using rule 44 (expression -> expression ISEQUALS expression .)
+    ISNOTEQUALS     reduce using rule 44 (expression -> expression ISEQUALS expression .)
+    AND             reduce using rule 44 (expression -> expression ISEQUALS expression .)
+    OR              reduce using rule 44 (expression -> expression ISEQUALS expression .)
+    SEMICOLON       reduce using rule 44 (expression -> expression ISEQUALS expression .)
+    RPAREN          reduce using rule 44 (expression -> expression ISEQUALS expression .)
+    COMMA           reduce using rule 44 (expression -> expression ISEQUALS expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+
+  ! PLUS            [ reduce using rule 44 (expression -> expression ISEQUALS expression .) ]
+  ! MINUS           [ reduce using rule 44 (expression -> expression ISEQUALS expression .) ]
+  ! TIMES           [ reduce using rule 44 (expression -> expression ISEQUALS expression .) ]
+  ! DIVIDE          [ reduce using rule 44 (expression -> expression ISEQUALS expression .) ]
+  ! MODULUS         [ reduce using rule 44 (expression -> expression ISEQUALS expression .) ]
+  ! ISGREATERTHAN   [ reduce using rule 44 (expression -> expression ISEQUALS expression .) ]
+  ! ISLESSTHAN      [ reduce using rule 44 (expression -> expression ISEQUALS expression .) ]
+  ! ISGREATERTHANEQUAL [ reduce using rule 44 (expression -> expression ISEQUALS expression .) ]
+  ! ISLESSTHANEQUAL [ reduce using rule 44 (expression -> expression ISEQUALS expression .) ]
+  ! ISEQUALS        [ shift and go to state 40 ]
+  ! ISNOTEQUALS     [ shift and go to state 41 ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 63
+
+    (45) expression -> expression ISNOTEQUALS expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    ISEQUALS        reduce using rule 45 (expression -> expression ISNOTEQUALS expression .)
+    ISNOTEQUALS     reduce using rule 45 (expression -> expression ISNOTEQUALS expression .)
+    AND             reduce using rule 45 (expression -> expression ISNOTEQUALS expression .)
+    OR              reduce using rule 45 (expression -> expression ISNOTEQUALS expression .)
+    SEMICOLON       reduce using rule 45 (expression -> expression ISNOTEQUALS expression .)
+    RPAREN          reduce using rule 45 (expression -> expression ISNOTEQUALS expression .)
+    COMMA           reduce using rule 45 (expression -> expression ISNOTEQUALS expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+
+  ! PLUS            [ reduce using rule 45 (expression -> expression ISNOTEQUALS expression .) ]
+  ! MINUS           [ reduce using rule 45 (expression -> expression ISNOTEQUALS expression .) ]
+  ! TIMES           [ reduce using rule 45 (expression -> expression ISNOTEQUALS expression .) ]
+  ! DIVIDE          [ reduce using rule 45 (expression -> expression ISNOTEQUALS expression .) ]
+  ! MODULUS         [ reduce using rule 45 (expression -> expression ISNOTEQUALS expression .) ]
+  ! ISGREATERTHAN   [ reduce using rule 45 (expression -> expression ISNOTEQUALS expression .) ]
+  ! ISLESSTHAN      [ reduce using rule 45 (expression -> expression ISNOTEQUALS expression .) ]
+  ! ISGREATERTHANEQUAL [ reduce using rule 45 (expression -> expression ISNOTEQUALS expression .) ]
+  ! ISLESSTHANEQUAL [ reduce using rule 45 (expression -> expression ISNOTEQUALS expression .) ]
+  ! ISEQUALS        [ shift and go to state 40 ]
+  ! ISNOTEQUALS     [ shift and go to state 41 ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 64
+
+    (46) expression -> expression AND expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    AND             reduce using rule 46 (expression -> expression AND expression .)
+    OR              reduce using rule 46 (expression -> expression AND expression .)
+    SEMICOLON       reduce using rule 46 (expression -> expression AND expression .)
+    RPAREN          reduce using rule 46 (expression -> expression AND expression .)
+    COMMA           reduce using rule 46 (expression -> expression AND expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+    ISEQUALS        shift and go to state 40
+    ISNOTEQUALS     shift and go to state 41
+
+  ! PLUS            [ reduce using rule 46 (expression -> expression AND expression .) ]
+  ! MINUS           [ reduce using rule 46 (expression -> expression AND expression .) ]
+  ! TIMES           [ reduce using rule 46 (expression -> expression AND expression .) ]
+  ! DIVIDE          [ reduce using rule 46 (expression -> expression AND expression .) ]
+  ! MODULUS         [ reduce using rule 46 (expression -> expression AND expression .) ]
+  ! ISGREATERTHAN   [ reduce using rule 46 (expression -> expression AND expression .) ]
+  ! ISLESSTHAN      [ reduce using rule 46 (expression -> expression AND expression .) ]
+  ! ISGREATERTHANEQUAL [ reduce using rule 46 (expression -> expression AND expression .) ]
+  ! ISLESSTHANEQUAL [ reduce using rule 46 (expression -> expression AND expression .) ]
+  ! ISEQUALS        [ reduce using rule 46 (expression -> expression AND expression .) ]
+  ! ISNOTEQUALS     [ reduce using rule 46 (expression -> expression AND expression .) ]
+  ! AND             [ shift and go to state 42 ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 65
+
+    (47) expression -> expression OR expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    OR              reduce using rule 47 (expression -> expression OR expression .)
+    SEMICOLON       reduce using rule 47 (expression -> expression OR expression .)
+    RPAREN          reduce using rule 47 (expression -> expression OR expression .)
+    COMMA           reduce using rule 47 (expression -> expression OR expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+    ISEQUALS        shift and go to state 40
+    ISNOTEQUALS     shift and go to state 41
+    AND             shift and go to state 42
+
+  ! PLUS            [ reduce using rule 47 (expression -> expression OR expression .) ]
+  ! MINUS           [ reduce using rule 47 (expression -> expression OR expression .) ]
+  ! TIMES           [ reduce using rule 47 (expression -> expression OR expression .) ]
+  ! DIVIDE          [ reduce using rule 47 (expression -> expression OR expression .) ]
+  ! MODULUS         [ reduce using rule 47 (expression -> expression OR expression .) ]
+  ! ISGREATERTHAN   [ reduce using rule 47 (expression -> expression OR expression .) ]
+  ! ISLESSTHAN      [ reduce using rule 47 (expression -> expression OR expression .) ]
+  ! ISGREATERTHANEQUAL [ reduce using rule 47 (expression -> expression OR expression .) ]
+  ! ISLESSTHANEQUAL [ reduce using rule 47 (expression -> expression OR expression .) ]
+  ! ISEQUALS        [ reduce using rule 47 (expression -> expression OR expression .) ]
+  ! ISNOTEQUALS     [ reduce using rule 47 (expression -> expression OR expression .) ]
+  ! AND             [ reduce using rule 47 (expression -> expression OR expression .) ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 66
+
+    (50) expression -> LPAREN expression RPAREN .
+
+    PLUS            reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    MODULUS         reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    ISGREATERTHAN   reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    ISLESSTHAN      reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    ISGREATERTHANEQUAL reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    ISLESSTHANEQUAL reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    ISEQUALS        reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    ISNOTEQUALS     reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    AND             reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    OR              reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    SEMICOLON       reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+    COMMA           reduce using rule 50 (expression -> LPAREN expression RPAREN .)
+
+
+state 67
+
+    (5) declaration -> type . IDENTIFIER
+    (6) declaration -> type . IDENTIFIER EQUALS expression
+
+    IDENTIFIER      shift and go to state 84
+
+
+state 68
+
+    (26) block -> LBRACE . statements RBRACE
+    (17) statements -> . statement
+    (18) statements -> . statements statement
+    (19) statement -> . declaration SEMICOLON
+    (20) statement -> . expression SEMICOLON
+    (21) statement -> . if_statement
+    (22) statement -> . while_statement
+    (23) statement -> . for_statement
+    (24) statement -> . return_statement
+    (25) statement -> . block
+    (5) declaration -> . type IDENTIFIER
+    (6) declaration -> . type IDENTIFIER EQUALS expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+    (27) if_statement -> . IF LPAREN expression RPAREN statement
+    (28) if_statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (29) while_statement -> . WHILE LPAREN expression RPAREN statement
+    (30) for_statement -> . FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement
+    (33) return_statement -> . RETURN expression SEMICOLON
+    (34) return_statement -> . RETURN SEMICOLON
+    (26) block -> . LBRACE statements RBRACE
+    (12) type -> . INT
+    (13) type -> . VOID
+    (14) type -> . CHAR
+    (15) type -> . FLOAT
+    (16) type -> . DOUBLE
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+    IF              shift and go to state 78
+    WHILE           shift and go to state 79
+    FOR             shift and go to state 80
+    RETURN          shift and go to state 81
+    LBRACE          shift and go to state 68
+    INT             shift and go to state 6
+    VOID            shift and go to state 7
+    CHAR            shift and go to state 8
+    FLOAT           shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    statements                     shift and go to state 85
+    statement                      shift and go to state 70
+    declaration                    shift and go to state 71
+    expression                     shift and go to state 72
+    if_statement                   shift and go to state 73
+    while_statement                shift and go to state 74
+    for_statement                  shift and go to state 75
+    return_statement               shift and go to state 76
+    block                          shift and go to state 77
+    type                           shift and go to state 67
+
+state 69
+
+    (7) function -> type IDENTIFIER LPAREN parameter_list RPAREN LBRACE statements . RBRACE
+    (18) statements -> statements . statement
+    (19) statement -> . declaration SEMICOLON
+    (20) statement -> . expression SEMICOLON
+    (21) statement -> . if_statement
+    (22) statement -> . while_statement
+    (23) statement -> . for_statement
+    (24) statement -> . return_statement
+    (25) statement -> . block
+    (5) declaration -> . type IDENTIFIER
+    (6) declaration -> . type IDENTIFIER EQUALS expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+    (27) if_statement -> . IF LPAREN expression RPAREN statement
+    (28) if_statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (29) while_statement -> . WHILE LPAREN expression RPAREN statement
+    (30) for_statement -> . FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement
+    (33) return_statement -> . RETURN expression SEMICOLON
+    (34) return_statement -> . RETURN SEMICOLON
+    (26) block -> . LBRACE statements RBRACE
+    (12) type -> . INT
+    (13) type -> . VOID
+    (14) type -> . CHAR
+    (15) type -> . FLOAT
+    (16) type -> . DOUBLE
+
+    RBRACE          shift and go to state 86
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+    IF              shift and go to state 78
+    WHILE           shift and go to state 79
+    FOR             shift and go to state 80
+    RETURN          shift and go to state 81
+    LBRACE          shift and go to state 68
+    INT             shift and go to state 6
+    VOID            shift and go to state 7
+    CHAR            shift and go to state 8
+    FLOAT           shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    type                           shift and go to state 67
+    statement                      shift and go to state 87
+    declaration                    shift and go to state 71
+    expression                     shift and go to state 72
+    if_statement                   shift and go to state 73
+    while_statement                shift and go to state 74
+    for_statement                  shift and go to state 75
+    return_statement               shift and go to state 76
+    block                          shift and go to state 77
+
+state 70
+
+    (17) statements -> statement .
+
+    RBRACE          reduce using rule 17 (statements -> statement .)
+    NOT             reduce using rule 17 (statements -> statement .)
+    MINUS           reduce using rule 17 (statements -> statement .)
+    LPAREN          reduce using rule 17 (statements -> statement .)
+    NUMBER          reduce using rule 17 (statements -> statement .)
+    IDENTIFIER      reduce using rule 17 (statements -> statement .)
+    IF              reduce using rule 17 (statements -> statement .)
+    WHILE           reduce using rule 17 (statements -> statement .)
+    FOR             reduce using rule 17 (statements -> statement .)
+    RETURN          reduce using rule 17 (statements -> statement .)
+    LBRACE          reduce using rule 17 (statements -> statement .)
+    INT             reduce using rule 17 (statements -> statement .)
+    VOID            reduce using rule 17 (statements -> statement .)
+    CHAR            reduce using rule 17 (statements -> statement .)
+    FLOAT           reduce using rule 17 (statements -> statement .)
+    DOUBLE          reduce using rule 17 (statements -> statement .)
+
+
+state 71
+
+    (19) statement -> declaration . SEMICOLON
+
+    SEMICOLON       shift and go to state 88
+
+
+state 72
+
+    (20) statement -> expression . SEMICOLON
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    SEMICOLON       shift and go to state 89
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+    ISEQUALS        shift and go to state 40
+    ISNOTEQUALS     shift and go to state 41
+    AND             shift and go to state 42
+    OR              shift and go to state 43
+
+
+state 73
+
+    (21) statement -> if_statement .
+
+    RBRACE          reduce using rule 21 (statement -> if_statement .)
+    NOT             reduce using rule 21 (statement -> if_statement .)
+    MINUS           reduce using rule 21 (statement -> if_statement .)
+    LPAREN          reduce using rule 21 (statement -> if_statement .)
+    NUMBER          reduce using rule 21 (statement -> if_statement .)
+    IDENTIFIER      reduce using rule 21 (statement -> if_statement .)
+    IF              reduce using rule 21 (statement -> if_statement .)
+    WHILE           reduce using rule 21 (statement -> if_statement .)
+    FOR             reduce using rule 21 (statement -> if_statement .)
+    RETURN          reduce using rule 21 (statement -> if_statement .)
+    LBRACE          reduce using rule 21 (statement -> if_statement .)
+    INT             reduce using rule 21 (statement -> if_statement .)
+    VOID            reduce using rule 21 (statement -> if_statement .)
+    CHAR            reduce using rule 21 (statement -> if_statement .)
+    FLOAT           reduce using rule 21 (statement -> if_statement .)
+    DOUBLE          reduce using rule 21 (statement -> if_statement .)
+    ELSE            reduce using rule 21 (statement -> if_statement .)
+
+
+state 74
+
+    (22) statement -> while_statement .
+
+    RBRACE          reduce using rule 22 (statement -> while_statement .)
+    NOT             reduce using rule 22 (statement -> while_statement .)
+    MINUS           reduce using rule 22 (statement -> while_statement .)
+    LPAREN          reduce using rule 22 (statement -> while_statement .)
+    NUMBER          reduce using rule 22 (statement -> while_statement .)
+    IDENTIFIER      reduce using rule 22 (statement -> while_statement .)
+    IF              reduce using rule 22 (statement -> while_statement .)
+    WHILE           reduce using rule 22 (statement -> while_statement .)
+    FOR             reduce using rule 22 (statement -> while_statement .)
+    RETURN          reduce using rule 22 (statement -> while_statement .)
+    LBRACE          reduce using rule 22 (statement -> while_statement .)
+    INT             reduce using rule 22 (statement -> while_statement .)
+    VOID            reduce using rule 22 (statement -> while_statement .)
+    CHAR            reduce using rule 22 (statement -> while_statement .)
+    FLOAT           reduce using rule 22 (statement -> while_statement .)
+    DOUBLE          reduce using rule 22 (statement -> while_statement .)
+    ELSE            reduce using rule 22 (statement -> while_statement .)
+
+
+state 75
+
+    (23) statement -> for_statement .
+
+    RBRACE          reduce using rule 23 (statement -> for_statement .)
+    NOT             reduce using rule 23 (statement -> for_statement .)
+    MINUS           reduce using rule 23 (statement -> for_statement .)
+    LPAREN          reduce using rule 23 (statement -> for_statement .)
+    NUMBER          reduce using rule 23 (statement -> for_statement .)
+    IDENTIFIER      reduce using rule 23 (statement -> for_statement .)
+    IF              reduce using rule 23 (statement -> for_statement .)
+    WHILE           reduce using rule 23 (statement -> for_statement .)
+    FOR             reduce using rule 23 (statement -> for_statement .)
+    RETURN          reduce using rule 23 (statement -> for_statement .)
+    LBRACE          reduce using rule 23 (statement -> for_statement .)
+    INT             reduce using rule 23 (statement -> for_statement .)
+    VOID            reduce using rule 23 (statement -> for_statement .)
+    CHAR            reduce using rule 23 (statement -> for_statement .)
+    FLOAT           reduce using rule 23 (statement -> for_statement .)
+    DOUBLE          reduce using rule 23 (statement -> for_statement .)
+    ELSE            reduce using rule 23 (statement -> for_statement .)
+
+
+state 76
+
+    (24) statement -> return_statement .
+
+    RBRACE          reduce using rule 24 (statement -> return_statement .)
+    NOT             reduce using rule 24 (statement -> return_statement .)
+    MINUS           reduce using rule 24 (statement -> return_statement .)
+    LPAREN          reduce using rule 24 (statement -> return_statement .)
+    NUMBER          reduce using rule 24 (statement -> return_statement .)
+    IDENTIFIER      reduce using rule 24 (statement -> return_statement .)
+    IF              reduce using rule 24 (statement -> return_statement .)
+    WHILE           reduce using rule 24 (statement -> return_statement .)
+    FOR             reduce using rule 24 (statement -> return_statement .)
+    RETURN          reduce using rule 24 (statement -> return_statement .)
+    LBRACE          reduce using rule 24 (statement -> return_statement .)
+    INT             reduce using rule 24 (statement -> return_statement .)
+    VOID            reduce using rule 24 (statement -> return_statement .)
+    CHAR            reduce using rule 24 (statement -> return_statement .)
+    FLOAT           reduce using rule 24 (statement -> return_statement .)
+    DOUBLE          reduce using rule 24 (statement -> return_statement .)
+    ELSE            reduce using rule 24 (statement -> return_statement .)
+
+
+state 77
+
+    (25) statement -> block .
+
+    RBRACE          reduce using rule 25 (statement -> block .)
+    NOT             reduce using rule 25 (statement -> block .)
+    MINUS           reduce using rule 25 (statement -> block .)
+    LPAREN          reduce using rule 25 (statement -> block .)
+    NUMBER          reduce using rule 25 (statement -> block .)
+    IDENTIFIER      reduce using rule 25 (statement -> block .)
+    IF              reduce using rule 25 (statement -> block .)
+    WHILE           reduce using rule 25 (statement -> block .)
+    FOR             reduce using rule 25 (statement -> block .)
+    RETURN          reduce using rule 25 (statement -> block .)
+    LBRACE          reduce using rule 25 (statement -> block .)
+    INT             reduce using rule 25 (statement -> block .)
+    VOID            reduce using rule 25 (statement -> block .)
+    CHAR            reduce using rule 25 (statement -> block .)
+    FLOAT           reduce using rule 25 (statement -> block .)
+    DOUBLE          reduce using rule 25 (statement -> block .)
+    ELSE            reduce using rule 25 (statement -> block .)
+
+
+state 78
+
+    (27) if_statement -> IF . LPAREN expression RPAREN statement
+    (28) if_statement -> IF . LPAREN expression RPAREN statement ELSE statement
+
+    LPAREN          shift and go to state 90
+
+
+state 79
+
+    (29) while_statement -> WHILE . LPAREN expression RPAREN statement
+
+    LPAREN          shift and go to state 91
+
+
+state 80
+
+    (30) for_statement -> FOR . LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement
+
+    LPAREN          shift and go to state 92
+
+
+state 81
+
+    (33) return_statement -> RETURN . expression SEMICOLON
+    (34) return_statement -> RETURN . SEMICOLON
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    SEMICOLON       shift and go to state 94
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 93
+
+state 82
+
+    (54) expression -> IDENTIFIER LPAREN argument_list RPAREN .
+
+    PLUS            reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    MINUS           reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    TIMES           reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    DIVIDE          reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    MODULUS         reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    ISGREATERTHAN   reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    ISLESSTHAN      reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    ISGREATERTHANEQUAL reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    ISLESSTHANEQUAL reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    ISEQUALS        reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    ISNOTEQUALS     reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    AND             reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    OR              reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    SEMICOLON       reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    RPAREN          reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+    COMMA           reduce using rule 54 (expression -> IDENTIFIER LPAREN argument_list RPAREN .)
+
+
+state 83
+
+    (56) argument_list -> argument_list COMMA . expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 95
+
+state 84
+
+    (5) declaration -> type IDENTIFIER .
+    (6) declaration -> type IDENTIFIER . EQUALS expression
+
+    SEMICOLON       reduce using rule 5 (declaration -> type IDENTIFIER .)
+    EQUALS          shift and go to state 15
+
+
+state 85
+
+    (26) block -> LBRACE statements . RBRACE
+    (18) statements -> statements . statement
+    (19) statement -> . declaration SEMICOLON
+    (20) statement -> . expression SEMICOLON
+    (21) statement -> . if_statement
+    (22) statement -> . while_statement
+    (23) statement -> . for_statement
+    (24) statement -> . return_statement
+    (25) statement -> . block
+    (5) declaration -> . type IDENTIFIER
+    (6) declaration -> . type IDENTIFIER EQUALS expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+    (27) if_statement -> . IF LPAREN expression RPAREN statement
+    (28) if_statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (29) while_statement -> . WHILE LPAREN expression RPAREN statement
+    (30) for_statement -> . FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement
+    (33) return_statement -> . RETURN expression SEMICOLON
+    (34) return_statement -> . RETURN SEMICOLON
+    (26) block -> . LBRACE statements RBRACE
+    (12) type -> . INT
+    (13) type -> . VOID
+    (14) type -> . CHAR
+    (15) type -> . FLOAT
+    (16) type -> . DOUBLE
+
+    RBRACE          shift and go to state 96
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+    IF              shift and go to state 78
+    WHILE           shift and go to state 79
+    FOR             shift and go to state 80
+    RETURN          shift and go to state 81
+    LBRACE          shift and go to state 68
+    INT             shift and go to state 6
+    VOID            shift and go to state 7
+    CHAR            shift and go to state 8
+    FLOAT           shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    statement                      shift and go to state 87
+    declaration                    shift and go to state 71
+    expression                     shift and go to state 72
+    if_statement                   shift and go to state 73
+    while_statement                shift and go to state 74
+    for_statement                  shift and go to state 75
+    return_statement               shift and go to state 76
+    block                          shift and go to state 77
+    type                           shift and go to state 67
+
+state 86
+
+    (7) function -> type IDENTIFIER LPAREN parameter_list RPAREN LBRACE statements RBRACE .
+
+    INT             reduce using rule 7 (function -> type IDENTIFIER LPAREN parameter_list RPAREN LBRACE statements RBRACE .)
+    VOID            reduce using rule 7 (function -> type IDENTIFIER LPAREN parameter_list RPAREN LBRACE statements RBRACE .)
+    CHAR            reduce using rule 7 (function -> type IDENTIFIER LPAREN parameter_list RPAREN LBRACE statements RBRACE .)
+    FLOAT           reduce using rule 7 (function -> type IDENTIFIER LPAREN parameter_list RPAREN LBRACE statements RBRACE .)
+    DOUBLE          reduce using rule 7 (function -> type IDENTIFIER LPAREN parameter_list RPAREN LBRACE statements RBRACE .)
+    $end            reduce using rule 7 (function -> type IDENTIFIER LPAREN parameter_list RPAREN LBRACE statements RBRACE .)
+
+
+state 87
+
+    (18) statements -> statements statement .
+
+    RBRACE          reduce using rule 18 (statements -> statements statement .)
+    NOT             reduce using rule 18 (statements -> statements statement .)
+    MINUS           reduce using rule 18 (statements -> statements statement .)
+    LPAREN          reduce using rule 18 (statements -> statements statement .)
+    NUMBER          reduce using rule 18 (statements -> statements statement .)
+    IDENTIFIER      reduce using rule 18 (statements -> statements statement .)
+    IF              reduce using rule 18 (statements -> statements statement .)
+    WHILE           reduce using rule 18 (statements -> statements statement .)
+    FOR             reduce using rule 18 (statements -> statements statement .)
+    RETURN          reduce using rule 18 (statements -> statements statement .)
+    LBRACE          reduce using rule 18 (statements -> statements statement .)
+    INT             reduce using rule 18 (statements -> statements statement .)
+    VOID            reduce using rule 18 (statements -> statements statement .)
+    CHAR            reduce using rule 18 (statements -> statements statement .)
+    FLOAT           reduce using rule 18 (statements -> statements statement .)
+    DOUBLE          reduce using rule 18 (statements -> statements statement .)
+
+
+state 88
+
+    (19) statement -> declaration SEMICOLON .
+
+    RBRACE          reduce using rule 19 (statement -> declaration SEMICOLON .)
+    NOT             reduce using rule 19 (statement -> declaration SEMICOLON .)
+    MINUS           reduce using rule 19 (statement -> declaration SEMICOLON .)
+    LPAREN          reduce using rule 19 (statement -> declaration SEMICOLON .)
+    NUMBER          reduce using rule 19 (statement -> declaration SEMICOLON .)
+    IDENTIFIER      reduce using rule 19 (statement -> declaration SEMICOLON .)
+    IF              reduce using rule 19 (statement -> declaration SEMICOLON .)
+    WHILE           reduce using rule 19 (statement -> declaration SEMICOLON .)
+    FOR             reduce using rule 19 (statement -> declaration SEMICOLON .)
+    RETURN          reduce using rule 19 (statement -> declaration SEMICOLON .)
+    LBRACE          reduce using rule 19 (statement -> declaration SEMICOLON .)
+    INT             reduce using rule 19 (statement -> declaration SEMICOLON .)
+    VOID            reduce using rule 19 (statement -> declaration SEMICOLON .)
+    CHAR            reduce using rule 19 (statement -> declaration SEMICOLON .)
+    FLOAT           reduce using rule 19 (statement -> declaration SEMICOLON .)
+    DOUBLE          reduce using rule 19 (statement -> declaration SEMICOLON .)
+    ELSE            reduce using rule 19 (statement -> declaration SEMICOLON .)
+
+
+state 89
+
+    (20) statement -> expression SEMICOLON .
+
+    RBRACE          reduce using rule 20 (statement -> expression SEMICOLON .)
+    NOT             reduce using rule 20 (statement -> expression SEMICOLON .)
+    MINUS           reduce using rule 20 (statement -> expression SEMICOLON .)
+    LPAREN          reduce using rule 20 (statement -> expression SEMICOLON .)
+    NUMBER          reduce using rule 20 (statement -> expression SEMICOLON .)
+    IDENTIFIER      reduce using rule 20 (statement -> expression SEMICOLON .)
+    IF              reduce using rule 20 (statement -> expression SEMICOLON .)
+    WHILE           reduce using rule 20 (statement -> expression SEMICOLON .)
+    FOR             reduce using rule 20 (statement -> expression SEMICOLON .)
+    RETURN          reduce using rule 20 (statement -> expression SEMICOLON .)
+    LBRACE          reduce using rule 20 (statement -> expression SEMICOLON .)
+    INT             reduce using rule 20 (statement -> expression SEMICOLON .)
+    VOID            reduce using rule 20 (statement -> expression SEMICOLON .)
+    CHAR            reduce using rule 20 (statement -> expression SEMICOLON .)
+    FLOAT           reduce using rule 20 (statement -> expression SEMICOLON .)
+    DOUBLE          reduce using rule 20 (statement -> expression SEMICOLON .)
+    ELSE            reduce using rule 20 (statement -> expression SEMICOLON .)
+
+
+state 90
+
+    (27) if_statement -> IF LPAREN . expression RPAREN statement
+    (28) if_statement -> IF LPAREN . expression RPAREN statement ELSE statement
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 97
+
+state 91
+
+    (29) while_statement -> WHILE LPAREN . expression RPAREN statement
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+
+    expression                     shift and go to state 98
+
+state 92
+
+    (30) for_statement -> FOR LPAREN . opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement
+    (31) opt_expression -> . expression
+    (32) opt_expression -> . empty
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+    (58) empty -> .
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+    SEMICOLON       reduce using rule 58 (empty -> .)
+
+    opt_expression                 shift and go to state 99
+    expression                     shift and go to state 100
+    empty                          shift and go to state 101
+
+state 93
+
+    (33) return_statement -> RETURN expression . SEMICOLON
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    SEMICOLON       shift and go to state 102
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+    ISEQUALS        shift and go to state 40
+    ISNOTEQUALS     shift and go to state 41
+    AND             shift and go to state 42
+    OR              shift and go to state 43
+
+
+state 94
+
+    (34) return_statement -> RETURN SEMICOLON .
+
+    RBRACE          reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    NOT             reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    MINUS           reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    LPAREN          reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    NUMBER          reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    IDENTIFIER      reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    IF              reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    WHILE           reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    FOR             reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    RETURN          reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    LBRACE          reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    INT             reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    VOID            reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    CHAR            reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    FLOAT           reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    DOUBLE          reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+    ELSE            reduce using rule 34 (return_statement -> RETURN SEMICOLON .)
+
+
+state 95
+
+    (56) argument_list -> argument_list COMMA expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    RPAREN          reduce using rule 56 (argument_list -> argument_list COMMA expression .)
+    COMMA           reduce using rule 56 (argument_list -> argument_list COMMA expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+    ISEQUALS        shift and go to state 40
+    ISNOTEQUALS     shift and go to state 41
+    AND             shift and go to state 42
+    OR              shift and go to state 43
+
+
+state 96
+
+    (26) block -> LBRACE statements RBRACE .
+
+    RBRACE          reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    NOT             reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    MINUS           reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    LPAREN          reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    NUMBER          reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    IDENTIFIER      reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    IF              reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    WHILE           reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    FOR             reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    RETURN          reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    LBRACE          reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    INT             reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    VOID            reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    CHAR            reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    FLOAT           reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    DOUBLE          reduce using rule 26 (block -> LBRACE statements RBRACE .)
+    ELSE            reduce using rule 26 (block -> LBRACE statements RBRACE .)
+
+
+state 97
+
+    (27) if_statement -> IF LPAREN expression . RPAREN statement
+    (28) if_statement -> IF LPAREN expression . RPAREN statement ELSE statement
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    RPAREN          shift and go to state 103
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+    ISEQUALS        shift and go to state 40
+    ISNOTEQUALS     shift and go to state 41
+    AND             shift and go to state 42
+    OR              shift and go to state 43
+
+
+state 98
+
+    (29) while_statement -> WHILE LPAREN expression . RPAREN statement
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    RPAREN          shift and go to state 104
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+    ISEQUALS        shift and go to state 40
+    ISNOTEQUALS     shift and go to state 41
+    AND             shift and go to state 42
+    OR              shift and go to state 43
+
+
+state 99
+
+    (30) for_statement -> FOR LPAREN opt_expression . SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement
+
+    SEMICOLON       shift and go to state 105
+
+
+state 100
+
+    (31) opt_expression -> expression .
+    (35) expression -> expression . PLUS expression
+    (36) expression -> expression . MINUS expression
+    (37) expression -> expression . TIMES expression
+    (38) expression -> expression . DIVIDE expression
+    (39) expression -> expression . MODULUS expression
+    (40) expression -> expression . ISGREATERTHAN expression
+    (41) expression -> expression . ISLESSTHAN expression
+    (42) expression -> expression . ISGREATERTHANEQUAL expression
+    (43) expression -> expression . ISLESSTHANEQUAL expression
+    (44) expression -> expression . ISEQUALS expression
+    (45) expression -> expression . ISNOTEQUALS expression
+    (46) expression -> expression . AND expression
+    (47) expression -> expression . OR expression
+
+    SEMICOLON       reduce using rule 31 (opt_expression -> expression .)
+    RPAREN          reduce using rule 31 (opt_expression -> expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    TIMES           shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULUS         shift and go to state 35
+    ISGREATERTHAN   shift and go to state 36
+    ISLESSTHAN      shift and go to state 37
+    ISGREATERTHANEQUAL shift and go to state 38
+    ISLESSTHANEQUAL shift and go to state 39
+    ISEQUALS        shift and go to state 40
+    ISNOTEQUALS     shift and go to state 41
+    AND             shift and go to state 42
+    OR              shift and go to state 43
+
+
+state 101
+
+    (32) opt_expression -> empty .
+
+    SEMICOLON       reduce using rule 32 (opt_expression -> empty .)
+    RPAREN          reduce using rule 32 (opt_expression -> empty .)
+
+
+state 102
+
+    (33) return_statement -> RETURN expression SEMICOLON .
+
+    RBRACE          reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    NOT             reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    MINUS           reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    LPAREN          reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    NUMBER          reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    IDENTIFIER      reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    IF              reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    WHILE           reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    FOR             reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    RETURN          reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    LBRACE          reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    INT             reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    VOID            reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    CHAR            reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    FLOAT           reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    DOUBLE          reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+    ELSE            reduce using rule 33 (return_statement -> RETURN expression SEMICOLON .)
+
+
+state 103
+
+    (27) if_statement -> IF LPAREN expression RPAREN . statement
+    (28) if_statement -> IF LPAREN expression RPAREN . statement ELSE statement
+    (19) statement -> . declaration SEMICOLON
+    (20) statement -> . expression SEMICOLON
+    (21) statement -> . if_statement
+    (22) statement -> . while_statement
+    (23) statement -> . for_statement
+    (24) statement -> . return_statement
+    (25) statement -> . block
+    (5) declaration -> . type IDENTIFIER
+    (6) declaration -> . type IDENTIFIER EQUALS expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+    (27) if_statement -> . IF LPAREN expression RPAREN statement
+    (28) if_statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (29) while_statement -> . WHILE LPAREN expression RPAREN statement
+    (30) for_statement -> . FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement
+    (33) return_statement -> . RETURN expression SEMICOLON
+    (34) return_statement -> . RETURN SEMICOLON
+    (26) block -> . LBRACE statements RBRACE
+    (12) type -> . INT
+    (13) type -> . VOID
+    (14) type -> . CHAR
+    (15) type -> . FLOAT
+    (16) type -> . DOUBLE
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+    IF              shift and go to state 78
+    WHILE           shift and go to state 79
+    FOR             shift and go to state 80
+    RETURN          shift and go to state 81
+    LBRACE          shift and go to state 68
+    INT             shift and go to state 6
+    VOID            shift and go to state 7
+    CHAR            shift and go to state 8
+    FLOAT           shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    expression                     shift and go to state 72
+    statement                      shift and go to state 106
+    declaration                    shift and go to state 71
+    if_statement                   shift and go to state 73
+    while_statement                shift and go to state 74
+    for_statement                  shift and go to state 75
+    return_statement               shift and go to state 76
+    block                          shift and go to state 77
+    type                           shift and go to state 67
+
+state 104
+
+    (29) while_statement -> WHILE LPAREN expression RPAREN . statement
+    (19) statement -> . declaration SEMICOLON
+    (20) statement -> . expression SEMICOLON
+    (21) statement -> . if_statement
+    (22) statement -> . while_statement
+    (23) statement -> . for_statement
+    (24) statement -> . return_statement
+    (25) statement -> . block
+    (5) declaration -> . type IDENTIFIER
+    (6) declaration -> . type IDENTIFIER EQUALS expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+    (27) if_statement -> . IF LPAREN expression RPAREN statement
+    (28) if_statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (29) while_statement -> . WHILE LPAREN expression RPAREN statement
+    (30) for_statement -> . FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement
+    (33) return_statement -> . RETURN expression SEMICOLON
+    (34) return_statement -> . RETURN SEMICOLON
+    (26) block -> . LBRACE statements RBRACE
+    (12) type -> . INT
+    (13) type -> . VOID
+    (14) type -> . CHAR
+    (15) type -> . FLOAT
+    (16) type -> . DOUBLE
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+    IF              shift and go to state 78
+    WHILE           shift and go to state 79
+    FOR             shift and go to state 80
+    RETURN          shift and go to state 81
+    LBRACE          shift and go to state 68
+    INT             shift and go to state 6
+    VOID            shift and go to state 7
+    CHAR            shift and go to state 8
+    FLOAT           shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    expression                     shift and go to state 72
+    statement                      shift and go to state 107
+    declaration                    shift and go to state 71
+    if_statement                   shift and go to state 73
+    while_statement                shift and go to state 74
+    for_statement                  shift and go to state 75
+    return_statement               shift and go to state 76
+    block                          shift and go to state 77
+    type                           shift and go to state 67
+
+state 105
+
+    (30) for_statement -> FOR LPAREN opt_expression SEMICOLON . opt_expression SEMICOLON opt_expression RPAREN statement
+    (31) opt_expression -> . expression
+    (32) opt_expression -> . empty
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+    (58) empty -> .
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+    SEMICOLON       reduce using rule 58 (empty -> .)
+
+    opt_expression                 shift and go to state 108
+    expression                     shift and go to state 100
+    empty                          shift and go to state 101
+
+state 106
+
+    (27) if_statement -> IF LPAREN expression RPAREN statement .
+    (28) if_statement -> IF LPAREN expression RPAREN statement . ELSE statement
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    RBRACE          reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    NOT             reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    MINUS           reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    LPAREN          reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    NUMBER          reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    IDENTIFIER      reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    IF              reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    WHILE           reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    FOR             reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    RETURN          reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    LBRACE          reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    INT             reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    VOID            reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    CHAR            reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    FLOAT           reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    DOUBLE          reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .)
+    ELSE            shift and go to state 109
+
+  ! ELSE            [ reduce using rule 27 (if_statement -> IF LPAREN expression RPAREN statement .) ]
+
+
+state 107
+
+    (29) while_statement -> WHILE LPAREN expression RPAREN statement .
+
+    RBRACE          reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    NOT             reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    MINUS           reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    LPAREN          reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    NUMBER          reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    IDENTIFIER      reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    IF              reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    WHILE           reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    FOR             reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    RETURN          reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    LBRACE          reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    INT             reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    VOID            reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    CHAR            reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    FLOAT           reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    DOUBLE          reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+    ELSE            reduce using rule 29 (while_statement -> WHILE LPAREN expression RPAREN statement .)
+
+
+state 108
+
+    (30) for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression . SEMICOLON opt_expression RPAREN statement
+
+    SEMICOLON       shift and go to state 110
+
+
+state 109
+
+    (28) if_statement -> IF LPAREN expression RPAREN statement ELSE . statement
+    (19) statement -> . declaration SEMICOLON
+    (20) statement -> . expression SEMICOLON
+    (21) statement -> . if_statement
+    (22) statement -> . while_statement
+    (23) statement -> . for_statement
+    (24) statement -> . return_statement
+    (25) statement -> . block
+    (5) declaration -> . type IDENTIFIER
+    (6) declaration -> . type IDENTIFIER EQUALS expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+    (27) if_statement -> . IF LPAREN expression RPAREN statement
+    (28) if_statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (29) while_statement -> . WHILE LPAREN expression RPAREN statement
+    (30) for_statement -> . FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement
+    (33) return_statement -> . RETURN expression SEMICOLON
+    (34) return_statement -> . RETURN SEMICOLON
+    (26) block -> . LBRACE statements RBRACE
+    (12) type -> . INT
+    (13) type -> . VOID
+    (14) type -> . CHAR
+    (15) type -> . FLOAT
+    (16) type -> . DOUBLE
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+    IF              shift and go to state 78
+    WHILE           shift and go to state 79
+    FOR             shift and go to state 80
+    RETURN          shift and go to state 81
+    LBRACE          shift and go to state 68
+    INT             shift and go to state 6
+    VOID            shift and go to state 7
+    CHAR            shift and go to state 8
+    FLOAT           shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    expression                     shift and go to state 72
+    statement                      shift and go to state 111
+    declaration                    shift and go to state 71
+    if_statement                   shift and go to state 73
+    while_statement                shift and go to state 74
+    for_statement                  shift and go to state 75
+    return_statement               shift and go to state 76
+    block                          shift and go to state 77
+    type                           shift and go to state 67
+
+state 110
+
+    (30) for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON . opt_expression RPAREN statement
+    (31) opt_expression -> . expression
+    (32) opt_expression -> . empty
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+    (58) empty -> .
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+    RPAREN          reduce using rule 58 (empty -> .)
+
+    opt_expression                 shift and go to state 112
+    expression                     shift and go to state 100
+    empty                          shift and go to state 101
+
+state 111
+
+    (28) if_statement -> IF LPAREN expression RPAREN statement ELSE statement .
+
+    RBRACE          reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    NOT             reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    MINUS           reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    LPAREN          reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    NUMBER          reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    IDENTIFIER      reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    IF              reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    WHILE           reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    FOR             reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    RETURN          reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    LBRACE          reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    INT             reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    VOID            reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    CHAR            reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    FLOAT           reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    DOUBLE          reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    ELSE            reduce using rule 28 (if_statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+
+
+state 112
+
+    (30) for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression . RPAREN statement
+
+    RPAREN          shift and go to state 113
+
+
+state 113
+
+    (30) for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN . statement
+    (19) statement -> . declaration SEMICOLON
+    (20) statement -> . expression SEMICOLON
+    (21) statement -> . if_statement
+    (22) statement -> . while_statement
+    (23) statement -> . for_statement
+    (24) statement -> . return_statement
+    (25) statement -> . block
+    (5) declaration -> . type IDENTIFIER
+    (6) declaration -> . type IDENTIFIER EQUALS expression
+    (35) expression -> . expression PLUS expression
+    (36) expression -> . expression MINUS expression
+    (37) expression -> . expression TIMES expression
+    (38) expression -> . expression DIVIDE expression
+    (39) expression -> . expression MODULUS expression
+    (40) expression -> . expression ISGREATERTHAN expression
+    (41) expression -> . expression ISLESSTHAN expression
+    (42) expression -> . expression ISGREATERTHANEQUAL expression
+    (43) expression -> . expression ISLESSTHANEQUAL expression
+    (44) expression -> . expression ISEQUALS expression
+    (45) expression -> . expression ISNOTEQUALS expression
+    (46) expression -> . expression AND expression
+    (47) expression -> . expression OR expression
+    (48) expression -> . NOT expression
+    (49) expression -> . MINUS expression
+    (50) expression -> . LPAREN expression RPAREN
+    (51) expression -> . NUMBER
+    (52) expression -> . IDENTIFIER
+    (53) expression -> . IDENTIFIER EQUALS expression
+    (54) expression -> . IDENTIFIER LPAREN argument_list RPAREN
+    (27) if_statement -> . IF LPAREN expression RPAREN statement
+    (28) if_statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (29) while_statement -> . WHILE LPAREN expression RPAREN statement
+    (30) for_statement -> . FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement
+    (33) return_statement -> . RETURN expression SEMICOLON
+    (34) return_statement -> . RETURN SEMICOLON
+    (26) block -> . LBRACE statements RBRACE
+    (12) type -> . INT
+    (13) type -> . VOID
+    (14) type -> . CHAR
+    (15) type -> . FLOAT
+    (16) type -> . DOUBLE
+
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 22
+    LPAREN          shift and go to state 24
+    NUMBER          shift and go to state 25
+    IDENTIFIER      shift and go to state 20
+    IF              shift and go to state 78
+    WHILE           shift and go to state 79
+    FOR             shift and go to state 80
+    RETURN          shift and go to state 81
+    LBRACE          shift and go to state 68
+    INT             shift and go to state 6
+    VOID            shift and go to state 7
+    CHAR            shift and go to state 8
+    FLOAT           shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    statement                      shift and go to state 114
+    declaration                    shift and go to state 71
+    expression                     shift and go to state 72
+    if_statement                   shift and go to state 73
+    while_statement                shift and go to state 74
+    for_statement                  shift and go to state 75
+    return_statement               shift and go to state 76
+    block                          shift and go to state 77
+    type                           shift and go to state 67
+
+state 114
+
+    (30) for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .
+
+    RBRACE          reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    NOT             reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    MINUS           reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    LPAREN          reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    NUMBER          reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    IDENTIFIER      reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    IF              reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    WHILE           reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    FOR             reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    RETURN          reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    LBRACE          reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    INT             reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    VOID            reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    CHAR            reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    FLOAT           reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    DOUBLE          reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+    ELSE            reduce using rule 30 (for_statement -> FOR LPAREN opt_expression SEMICOLON opt_expression SEMICOLON opt_expression RPAREN statement .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 49 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 49 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 49 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 49 resolved as shift
+WARNING: shift/reduce conflict for MODULUS in state 49 resolved as shift
+WARNING: shift/reduce conflict for ISGREATERTHAN in state 49 resolved as shift
+WARNING: shift/reduce conflict for ISLESSTHAN in state 49 resolved as shift
+WARNING: shift/reduce conflict for ISGREATERTHANEQUAL in state 49 resolved as shift
+WARNING: shift/reduce conflict for ISLESSTHANEQUAL in state 49 resolved as shift
+WARNING: shift/reduce conflict for ISEQUALS in state 49 resolved as shift
+WARNING: shift/reduce conflict for ISNOTEQUALS in state 49 resolved as shift
+WARNING: shift/reduce conflict for AND in state 49 resolved as shift
+WARNING: shift/reduce conflict for OR in state 49 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 106 resolved as shift

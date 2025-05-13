@@ -1,40 +1,175 @@
-import lexer
+from lexer import lexer
+from parser import parser
+import pprint
 
-if __name__ == "__main__":
-    lexer = lexer.tokenize("""
-    #include <stdio.h>
-    int main(){
-	int i;
-	scanf("%d",&i);
-	switch(i)
-	{
-		case(1):{
-			printf("one");
-			break;
-		}
-		case(2):{
-			printf("two");
-			break;
-		}
-		case(3):{
-			printf("three");
-			break;
-		}
-		case(4):{
-			printf("four");
-			break;
-		}
-		case(5):{
-			printf("five");
-			break;
-		}
-		case(6):{
-			printf("six");
-			break;
-		}
-		default:printf("Please enter value in range of 1-6");
-	}
-}
-""")      # Insert the code here
-    for tokens in lexer:
-        print(tokens)
+def generate_ast(code):
+    """Generate an Abstract Syntax Tree from C code."""
+    lexer.input(code)
+    print("Tokens:")
+    for tok in lexer:
+        print(f"{tok.type}: {tok.value}")
+    
+    lexer.input(code)
+    
+    try:
+        ast = parser.parse(code, lexer=lexer)
+        return ast
+    except Exception as e:
+        print(f"Parser error: {e}")
+        return None
+
+def print_ast(ast, indent=0):
+    """Pretty print the AST with proper indentation."""
+    if isinstance(ast, tuple):
+        print("  " * indent + ast[0])
+        for child in ast[1:]:
+            print_ast(child, indent + 1)
+    elif isinstance(ast, list):
+        for item in ast:
+            print_ast(item, indent)
+    else:
+        print("  " * indent + str(ast))
+
+def generate_control_flow(ast):
+    """Generate a control flow representation from the AST."""
+    flow = {'nodes': [], 'edges': []}
+    node_id = 0
+    
+    def process_node(node, parent_id=None):
+        nonlocal node_id
+        current_id = node_id
+        node_id += 1
+        
+        if isinstance(node, list):
+            list_id = current_id
+            flow['nodes'].append({'id': list_id, 'type': 'Program'})
+            if parent_id is not None:
+                flow['edges'].append({'from': parent_id, 'to': list_id})
+            for item in node:
+                process_node(item, list_id)
+            return list_id
+        
+        if not isinstance(node, tuple):
+            return current_id
+        
+        node_type = node[0]
+        node_info = {'id': current_id, 'type': node_type}
+        flow['nodes'].append(node_info)
+        
+        if parent_id is not None:
+            flow['edges'].append({'from': parent_id, 'to': current_id})
+        
+        if node_type == 'Function':
+            node_info['return_type'] = node[1]
+            node_info['name'] = node[2]
+            process_node(node[3], current_id)  # Parameters
+            process_node(node[4], current_id)  # Body
+            
+        elif node_type == 'DeclareAssign':
+            node_info['type'] = node[1]
+            node_info['variable'] = node[2]
+            process_node(node[3], current_id)
+            
+        elif node_type in ('If', 'IfElse'):
+            process_node(node[1], current_id)  # Condition
+            process_node(node[2], current_id)  # Then branch
+            if node_type == 'IfElse' and len(node) > 3:
+                process_node(node[3], current_id)  # Else branch
+                
+        elif node_type == 'While':
+            process_node(node[1], current_id)  # Condition
+            process_node(node[2], current_id)  # Body
+            
+        elif node_type == 'For':
+            if node[1]: process_node(node[1], current_id)  # Init
+            if node[2]: process_node(node[2], current_id)  # Condition
+            if node[3]: process_node(node[3], current_id)  # Update
+            process_node(node[4], current_id)  # Body
+            
+        elif node_type == 'BinOp':
+            node_info['operator'] = node[1]
+            process_node(node[2], current_id)  # Left
+            process_node(node[3], current_id)  # Right
+            
+        elif node_type in ('Number', 'Identifier'):
+            node_info['value'] = node[1]
+            
+        return current_id
+    
+    if ast:
+        process_node(ast)
+    return flow
+
+# Test cases
+test_cases = [
+    # Simple function with return
+    """
+    int main() {
+        return 0;
+    }
+    """,
+    
+    # Function with variables and arithmetic
+    """
+    int sum() {
+        int a = 5;
+        int b = 10;
+        return a + b;
+    }
+    """,
+    
+    # If-else statement
+    """
+    void check(int x) {
+        if (x > 0) {
+            return;
+        } else {
+            return;
+        }
+    }
+    """,
+    
+    # While loop
+    """
+    void countdown(int n) {
+        while (n > 0) {
+            n = n - 1;
+        }
+    }
+    """,
+    
+    # For loop
+    """
+    void loop() {
+        for (int i = 0; i < 10; i = i + 1) {
+            // Do nothing
+        }
+    }
+    """,
+    
+    # Function with parameters
+    """
+    int add(int a, int b) {
+        return a + b;
+    }
+    """
+]
+
+# Run all test cases
+for i, test_code in enumerate(test_cases, 1):
+    print(f"\n=== Test Case {i} ===")
+    print("Input Code:")
+    print(test_code.strip())
+    
+    ast = generate_ast(test_code)
+    print("\nAbstract Syntax Tree:")
+    if ast:
+        print_ast(ast)
+    else:
+        print("Failed to generate AST")
+    
+    if ast:
+        flow = generate_control_flow(ast)
+        print("\nControl Flow Graph:")
+        pprint.pprint(flow)
+    
