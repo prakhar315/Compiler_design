@@ -1,5 +1,6 @@
 from lexer import lexer
-from parser import parser
+from custom_parser import parser
+from flowchart_mapping import generate_flowchart
 import pprint
 
 def generate_ast(code):
@@ -172,4 +173,7 @@ for i, test_code in enumerate(test_cases, 1):
         flow = generate_control_flow(ast)
         print("\nControl Flow Graph:")
         pprint.pprint(flow)
+        flowchart = generate_flowchart(flow)
+        with open(f"flowchart_{i}.html", "w") as f:
+            f.write(flowchart.flowchart())
     
