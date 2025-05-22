@@ -7,9 +7,9 @@ def generate_flowchart(flowgraph):
         if node['type'] == 'Function':
             node_map[node['id']] = StartNode(f"Function {node['name']}")
         elif node['type'] in ['If', 'IfElse']:
-            node_map[node['id']] = ConditionNode(f"Condition {node['id']}")
+            node_map[node['id']] = ConditionNode(f"Condition {node['condition']}")
         elif node['type'] == 'While':
-            node_map[node['id']] = ConditionNode(f"While {node['id']}")
+            node_map[node['id']] = ConditionNode(f"While {node['name']}")
         elif node['type'] == 'Return':
             node_map[node['id']] = EndNode(f"Return {node['id']}")
         else:
