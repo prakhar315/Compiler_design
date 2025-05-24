@@ -40,6 +40,9 @@ def generate_control_flow(ast):
         nonlocal node_id
         current_id = node_id
         node_id += 1
+
+        if not isinstance(node, (tuple, list)):
+            return current_id
         
         if isinstance(node, list):
             # list_id = current_id
@@ -55,9 +58,6 @@ def generate_control_flow(ast):
                 prev_id = stmt_id
             return prev_id
         
-        if not isinstance(node, tuple):
-            return current_id
-        
         node_type = node[0]
         node_info = {'id': current_id, 'type': node_type}
         flow['nodes'].append(node_info)
@@ -66,52 +66,53 @@ def generate_control_flow(ast):
             flow['edges'].append({'from': parent_id, 'to': current_id})
         
         if node_type == 'Function':
-            node_info['return_type'] = node[1]
-            node_info['name'] = node[2]
-            process_node(node[3], current_id)  # Parameters
-            process_node(node[4], current_id)  # Body
+            node_info['return_type'] = node[1]  # Return type
+            node_info['name'] = node[2]  # Function name
+            node_info['params'] = process_node(node[3], current_id)  # Parameters
+            node_info['body'] = process_node(node[4], current_id)  # Body
             
         elif node_type == 'DeclareAssign':
-            node_info['var_type'] = node[1]
-            node_info['variable'] = node[2]
-            process_node(node[3], current_id)
+            node_info['var_type'] = node[1] # Variable type
+            node_info['variable'] = node[2] # Variable name
+            node_info['value'] = process_node(node[3], current_id)
             
-        elif node_type in ('If', 'IfElse'):
-            cond_id = process_node(node[1], current_id)  # Condition
-            node_info['condition'] = cond_id
-            then_id = process_node(node[2], current_id)  # Then branch
-            if node_type == 'IfElse' and len(node) > 3:
-                else_id = process_node(node[3], cond_id)  # Else branch
+        elif node_type in 'If':
+            node_info['condition'] = process_node(node[1], current_id)  # Condition
+            node_info['then'] = process_node(node[2], current_id)  # Then branch
+
+        elif node_type == 'IfElse':
+            node_info['condition'] = process_node(node[1], current_id) # Condition
+            node_info['then'] = process_node(node[2], current_id) # Then branch
+            if len(node) > 3:
+                node_info['else'] = process_node(node[3], current_id) # Else branch
                 
         elif node_type == 'While':
             cond_id = process_node(node[1], current_id)  # Condition
             body_id = process_node(node[2], current_id)  # Body
+            node_info['condition'] = cond_id
+            node_info['body'] = body_id
             flow['edges'].append({'from': body_id, 'to': cond_id})  # Loop back edge
             
         elif node_type == 'For':
-            # if node[1]: process_node(node[1], current_id)  # Init
-            # if node[2]: process_node(node[2], current_id)  # Condition
-            # if node[3]: process_node(node[3], current_id)  # Update
-            # process_node(node[4], current_id)  # Body
-            # For(init; cond; update) body
-            init_id = process_node(node[1], current_id) if node[1] else current_id
-            cond_id = process_node(node[2], init_id) if node[2] else init_id
-            body_id = process_node(node[4], cond_id)
-            update_id = process_node(node[3], body_id) if node[3] else body_id
+            node_info['init'] = process_node(node[1], current_id) if node[1] else None
+            node_info['condition'] = process_node(node[2], current_id) if node[2] else None
+            node_info['update'] = process_node(node[3], body_id) if node[3] else None
+            node_info['body'] = process_node(node[4], cond_id)
             # Back edge from update to condition
-            flow['edges'].append({'from': update_id, 'to': cond_id})
+            if node_info['update'] and node_info['condition']:
+                flow['edges'].append({'from': node_info['update'], 'to': node_info['condition']})
             
         elif node_type == 'BinOp':
-            node_info['operator'] = node[1]
-            process_node(node[2], current_id)  # Left
-            process_node(node[3], current_id)  # Right
+            node_info['operator'] = node[1] # Operator
+            node_info['left'] = process_node(node[2], current_id)  # Left
+            node_info['right'] = process_node(node[3], current_id)  # Right
             
         elif node_type in ('Number', 'Identifier'):
             node_info['value'] = node[1]
 
         elif node_type == 'Return':
             if len(node) > 1:
-                process_node(node[1], current_id)
+                node_info['returns'] = process_node(node[1], current_id)
             
         return current_id
     
