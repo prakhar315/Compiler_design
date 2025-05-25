@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Code Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>C Code Analyzer</h1>
+            <p>Enter your C code and select the analysis type you want to generate</p>
+        </header>
+
+        <div class="editor-container">
+            <div class="input-section">
+                <h2>Input Code</h2>
+                <textarea id="codeInput" placeholder="Enter your C code here...
+Example:
+#include <stdio.h>
+
+int main() {
+    int a = 5;
+    int b = 10;
+    int sum = a + b;
+    printf(&quot;Sum: %d&quot;, sum);
+    return 0;
+}"></textarea>
+                <div class="input-controls">
+                    <button id="clearBtn">Clear</button>
+                    <button id="analyzeBtn">Analyze Code</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <div class="output-header">
+                    <h2>Output</h2>
+                    <div class="selector-container">
+                        <label for="outputType">Select Analysis Type:</label>
+                        <select id="outputType">
+                            <option value="lexical">Lexical Analysis</option>
+                            <option value="ast">Abstract Syntax Tree (AST)</option>
+                            <option value="flowchart">Flowchart</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="outputDisplay" class="output-display">
+                    <div class="placeholder">
+                        <p>Enter C code and click "Analyze Code" to see the results</p>
+                        <div class="analysis-info">
+                            <h3>Analysis Types:</h3>
+                            <ul>
+                                <li><strong>Lexical Analysis:</strong> Breaks code into tokens (keywords, identifiers, operators, etc.)</li>
+                                <li><strong>AST:</strong> Shows the hierarchical structure of your code</li>
+                                <li><strong>Flowchart:</strong> Visual representation of program flow</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
