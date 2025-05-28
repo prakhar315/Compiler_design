@@ -1,6 +1,6 @@
 from ply import lex
 
-# List of reserved words
+# List of reserved words jo use honge
 reserved = {
     'alignas': 'ALIGNAS',
     'alignof': 'ALIGNOF',
