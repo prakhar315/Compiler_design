@@ -150,25 +150,37 @@ t_RBRACE = r'\}'
 t_LSQUARE = r'\['
 t_RSQUARE = r'\]'
 
+# Handles newlines in the input code.
+# It counts how many newline characters are there and updates the current line number.
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
+# This tells the lexer to ignore spaces and tab characters.
+# These are not meaningful tokens and are just for formatting.
 t_ignore = ' \t'
 
+# Handles single-line comments starting with `//`.
+# It skips over them and doesn't generate any token.
 def t_COMMENT(t):
     r'//.*'
     pass
-
+    
+# Handles multi-line block comments like /* comment */
+# These are also skipped and do not affect the token stream.
 def t_BLOCK_COMMENT(t):
     r'/\*[^*]*\*+(?:[^/*][^*]*\*+)*/'
     pass
 
+# Recognizes variable names, keywords, function names, etc.
+# If the identifier matches a keyword, its type is changed accordingly.
 def t_IDENTIFIER(t):
     r'[A-Za-z_][A-Za-z0-9_]*'
     t.type = reserved.get(t.value, 'IDENTIFIER')
     return t
 
+# Matches both integer and floating-point numbers, including hexadecimal.
+# Converts the matched number string to int or float accordingly.
 def t_NUMBER(t):
     r'((0x|0X)[0-9A-Fa-f]+)|(\d+(\.\d*)?([eE][+-]?\d+)?)'
     if '.' in t.value or 'e' in t.value.lower():
@@ -179,12 +191,18 @@ def t_NUMBER(t):
         t.value = int(t.value)
     return t
 
+# Handles any illegal or unrecognized character.
+# Prints an error message with the character and skips it.
 def t_error(t):
     print(f"Illegal character '{t.value[0]}' at line {t.lineno}")
     t.lexer.skip(1)
 
+# Creates the lexer using PLY's lex module.
+# This must be called after all token rules are defined.
 lexer = lex.lex()
 
+# Accepts code as input, sends it to the lexer.
+# Returns the lexer object to extract tokens using next() or a loop.
 def tokenize(data: str):
     lexer.input(data)
     return lexer
