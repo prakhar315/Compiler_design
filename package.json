@@ -1,0 +1,36 @@
+{
+  "name": "c-code-analyzer",
+  "version": "2.0.0",
+  "description": "A client-side web-based C code analyzer with lexical analysis and parse tree generation",
+  "main": "frontend/index.html",
+  "scripts": {
+    "dev": "python -m http.server 3000 --directory frontend",
+    "build": "echo 'No build step required - static files only'",
+    "start": "python -m http.server 8080 --directory frontend"
+  },
+  "keywords": [
+    "c-language",
+    "lexical-analysis",
+    "parser",
+    "ast",
+    "syntax-tree",
+    "compiler",
+    "tokenizer",
+    "static-analysis",
+    "web-app",
+    "javascript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prakhar315/Code_analyzer.git"
+  },
+  "homepage": "https://github.com/prakhar315/Code_analyzer#readme",
+  "bugs": {
+    "url": "https://github.com/prakhar315/Code_analyzer/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

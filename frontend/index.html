@@ -40,8 +40,7 @@ int main() {
                         <label for="outputType">Select Analysis Type:</label>
                         <select id="outputType">
                             <option value="lexical">Lexical Analysis</option>
-                            <option value="ast">Abstract Syntax Tree (AST)</option>
-                            <option value="flowchart">Flowchart</option>
+                            <option value="ast">Parse Tree (AST)</option>
                         </select>
                     </div>
                 </div>
@@ -51,9 +50,8 @@ int main() {
                         <div class="analysis-info">
                             <h3>Analysis Types:</h3>
                             <ul>
-                                <li><strong>Lexical Analysis:</strong> Breaks code into tokens (keywords, identifiers, operators, etc.)</li>
-                                <li><strong>AST:</strong> Shows the hierarchical structure of your code</li>
-                                <li><strong>Flowchart:</strong> Visual representation of program flow</li>
+                                <li><strong>Lexical Analysis:</strong> Breaks code into tokens (keywords, identifiers, operators, literals, etc.)</li>
+                                <li><strong>Parse Tree (AST):</strong> Shows the hierarchical structure of your code with functions, variables, and control structures</li>
                             </ul>
                         </div>
                     </div>
@@ -62,6 +60,8 @@ int main() {
         </div>
     </div>
 
+    <script src="c-analyzer.js"></script>
+    <script src="c-analyzer.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

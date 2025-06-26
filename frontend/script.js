@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const clearBtn = document.getElementById('clearBtn');
     const analyzeBtn = document.getElementById('analyzeBtn');
 
+    // Initialize analyzers
+    const tokenizer = new CTokenizer();
+    const parser = new CParser();
+
     // Clear button functionality
     clearBtn.addEventListener('click', function() {
         codeInput.value = '';
@@ -12,21 +16,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Analyze button functionality
-    analyzeBtn.addEventListener('click', async function() {
+    analyzeBtn.addEventListener('click', function() {
         const code = codeInput.value.trim();
         if (!code) {
             alert('Please enter some C code to analyze');
             return;
         }
 
-        await generateOutput(code, outputType.value);
+        generateOutput(code, outputType.value);
     });
 
     // Output type selector change
-    outputType.addEventListener('change', async function() {
+    outputType.addEventListener('change', function() {
         const code = codeInput.value.trim();
         if (code) {
-            await generateOutput(code, outputType.value);
+            generateOutput(code, outputType.value);
         }
     });
 
@@ -37,20 +41,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="analysis-info">
                     <h3>Analysis Types:</h3>
                     <ul>
-                        <li><strong>Lexical Analysis:</strong> Breaks code into tokens (keywords, identifiers, operators, etc.)</li>
-                        <li><strong>AST:</strong> Shows the hierarchical structure of your code</li>
-                        <li><strong>Flowchart:</strong> Visual representation of program flow</li>
+                        <li><strong>Lexical Analysis:</strong> Breaks code into tokens (keywords, identifiers, operators, literals, etc.)</li>
+                        <li><strong>Parse Tree (AST):</strong> Shows the hierarchical structure of your code with functions, variables, and control structures</li>
                     </ul>
                     <div style="margin-top: 15px; padding: 10px; background-color: #e8f4fd; border-radius: 5px; border-left: 4px solid #3498db;">
-                        <strong>Note:</strong> Make sure to start the lexer server first.<br>
-                        <small>Run: <code>python lexer/web_interface.py 8001</code></small>
+                        <strong>✨ Client-side Analysis:</strong> No server required! Analysis runs directly in your browser.
                     </div>
                 </div>
             </div>
         `;
     }
 
-    async function generateOutput(code, type) {
+    function generateOutput(code, type) {
         // Show loading message
         outputDisplay.innerHTML = `<div class="output-content">Analyzing code...</div>`;
 
@@ -59,14 +61,13 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             switch(type) {
                 case 'lexical':
-                    output = await generateLexicalAnalysis(code);
+                    output = generateLexicalAnalysis(code);
                     break;
                 case 'ast':
-                    output = await generateAST(code);
+                    output = generateAST(code);
                     break;
-                case 'flowchart':
-                    output = await generateFlowchart(code);
-                    break;
+                default:
+                    output = 'Unknown analysis type selected.';
             }
         } catch (error) {
             output = `Error generating analysis: ${error.message}`;
@@ -75,110 +76,25 @@ document.addEventListener('DOMContentLoaded', function() {
         outputDisplay.innerHTML = `<div class="output-content">${output}</div>`;
     }
 
-    async function generateLexicalAnalysis(code) {
+    function generateLexicalAnalysis(code) {
         try {
-            // Call the lexer API
-            const response = await fetch('http://localhost:8001/analyze', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ code: code })
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-
-            if (data.success) {
-                return data.formatted_output;
-            } else {
-                return `Error during lexical analysis: ${data.error}`;
-            }
+            const tokens = tokenizer.tokenize(code);
+            return tokenizer.formatTokens(tokens);
         } catch (error) {
-            return `Error: Could not connect to lexer server. Please start the server first.
-
-Run: python lexer/web_interface.py 8001
-
-Error details: ${error.message}`;
+            return `Error during lexical analysis: ${error.message}`;
         }
     }
 
-    async function generateAST(code) {
+    function generateAST(code) {
         try {
-            // Call the parser API
-            const response = await fetch('http://localhost:8005/parse', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ code: code })
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-
-            if (data.success) {
-                return data.formatted_output;
-            } else {
-                return `Error during AST generation: ${data.error}`;
-            }
+            const ast = parser.parse(code);
+            return parser.formatAST(ast);
         } catch (error) {
-            return `Error: Could not connect to parser server. Please start the server first.
-
-Run: python ast_server.py 8005
-
-Error details: ${error.message}`;
+            return `Error during AST generation: ${error.message}`;
         }
     }
 
-    async function generateFlowchart(code) {
-        try {
-            // Call the flowchart API
-            const response = await fetch('http://localhost:8003/flowchart', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ code: code })
-            });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-
-            if (data.success) {
-                // If SVG content is available, display it
-                if (data.svg_content) {
-                    return `Control Flow Graph:
-========================================
-
-${data.formatted_output}
-
-Visual Flowchart:
------------------
-${data.svg_content}`;
-                } else {
-                    return data.formatted_output;
-                }
-            } else {
-                return `Error during flowchart generation: ${data.error}`;
-            }
-        } catch (error) {
-            return `Error: Could not connect to flowchart server. Please start the server first.
-
-Run: python flowchart/web_interface.py 8003
-
-Error details: ${error.message}`;
-        }
-    }
 
     // Initialize with placeholder
     showPlaceholder();

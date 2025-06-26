@@ -1,89 +1,133 @@
 # C Code Analyzer
 
-A web-based C code analyzer with lexical analysis and AST generation.
+A client-side web-based C code analyzer with lexical analysis and parse tree (AST) generation. No backend servers required!
 
-## Quick Start
+## 🚀 Live Demo
 
-1. **Start the lexer server:**
+**Deployed on Vercel**: [https://your-app.vercel.app](https://your-app.vercel.app)
+
+## ✨ Features
+
+- **Client-side Processing**: Runs entirely in your browser - no servers needed
+- **Lexical Analysis**: Complete C language tokenization with detailed token information
+- **Parse Tree (AST)**: Abstract Syntax Tree generation showing code structure
+- **Real-time Analysis**: Instant results as you type
+- **Mobile Friendly**: Responsive design works on all devices
+- **No Installation**: Just open and use
+
+## 🎯 Quick Start
+
+### Option 1: Use Online (Recommended)
+Simply visit the live demo link above - no setup required!
+
+### Option 2: Run Locally
+1. **Clone the repository:**
    ```bash
-   cd lexer
-   python web_interface.py 8001
+   git clone https://github.com/prakhar315/Code_analyzer.git
+   cd Code_analyzer
    ```
 
-2. **Start the AST server:**
-   ```bash
-   python ast_server.py 8005
-   ```
-
-3. **Start the flowchart server:**
-   ```bash
-   python flowchart_server.py 8003
-   ```
-
-   **Note**: For Windows PowerShell, use semicolons instead of &&:
-   ```powershell
-   cd lexer; python web_interface.py 8001
-   python ast_server.py 8005
-   python flowchart_server.py 8003
-   ```
-
-4. **Open the frontend:**
+2. **Open the frontend:**
    Open `frontend/index.html` in your web browser
 
-5. **Analyze C code:**
+3. **Analyze C code:**
    - Enter your C code in the textarea
-   - Select analysis type (Lexical Analysis, AST, or Flowchart)
+   - Select analysis type (Lexical Analysis or Parse Tree)
    - Click "Analyze Code"
-   - View detailed results
+   - View detailed results instantly
 
-## Project Structure
+### Option 3: Deploy to Vercel
+1. **Fork this repository**
+2. **Connect to Vercel:**
+   - Go to [vercel.com](https://vercel.com)
+   - Import your forked repository
+   - Deploy automatically
+
+## 📁 Project Structure
 
 ```
 C-Code-Analyzer/
 ├── frontend/
 │   ├── index.html          # Main web interface
-│   ├── script.js           # Frontend logic
-│   └── style.css           # Styling
-├── lexer/
-│   ├── c_lexer.py          # PLY-based C lexer
-│   ├── web_interface.py    # Lexer HTTP API server
-│   └── __init__.py         # Package file
-├── parser/
-│   ├── ast_nodes.py        # AST node definitions
-│   ├── c_parser.py         # C language parser
-│   ├── ast_formatter.py    # AST formatting utilities
-│   ├── web_interface.py    # Parser HTTP API server
-│   └── __init__.py         # Package file
-├── flowchart/
-│   ├── cfg_nodes.py        # Control flow graph nodes
-│   ├── cfg_generator.py    # CFG generation logic
-│   ├── graphviz_renderer.py # Graphviz visualization
-│   ├── web_interface.py    # Flowchart HTTP API server
-│   └── __init__.py         # Package file
-├── flowchart_server.py     # Standalone flowchart server
+│   ├── script.js           # Main application logic
+│   ├── c-analyzer.js       # C language analyzer (tokenizer & parser)
+│   └── style.css           # Styling and responsive design
+├── vercel.json             # Vercel deployment configuration
+├── project_report/         # Comprehensive documentation
 └── README.md               # This file
 ```
 
-## Requirements
+## 🛠️ Technical Details
 
-- Python 3.6+
-- PLY library: `pip install ply`
+### Client-side Implementation
+- **No Backend Required**: All analysis runs in the browser using JavaScript
+- **Custom Tokenizer**: Implements C language lexical analysis
+- **Recursive Descent Parser**: Generates Abstract Syntax Trees
+- **Real-time Processing**: Instant analysis without server calls
 
-## Features
+### Supported C Language Features
+- **Keywords**: All C keywords (int, float, if, while, etc.)
+- **Operators**: Arithmetic, logical, comparison, assignment operators
+- **Literals**: Integer, float, string, and character literals
+- **Identifiers**: Variable and function names
+- **Comments**: Single-line (//) and multi-line (/* */) comments
+- **Preprocessor**: #include, #define directives
+- **Control Structures**: if/else, while, for loops
+- **Functions**: Function declarations and definitions
+- **Variables**: Variable declarations and assignments
 
-- **Lexical Analysis**: Complete C language tokenization
-- **AST Generation**: Abstract Syntax Tree creation and visualization
-- **Flowchart Generation**: Control flow graph visualization
-- **Token identification**: Keywords, operators, literals, etc.
-- **Tree structure**: Hierarchical code representation
-- **Visual flowcharts**: Text-based control flow diagrams
-- **Clean web interface**: Easy-to-use frontend
-- **Real-time analysis**: Instant results
+## 🎨 Features
 
-## API Endpoints
+- **Lexical Analysis**:
+  - Complete tokenization with token types and positions
+  - Line and column number tracking
+  - Token count summaries
+  - Detailed token listings
 
-- **Lexer**: `http://localhost:8001/analyze`
-- **AST Parser**: `http://localhost:8005/parse`
-- **Flowchart**: `http://localhost:8003/flowchart`
+- **Parse Tree (AST)**:
+  - Hierarchical code structure visualization
+  - Function and variable identification
+  - Control flow structure detection
+  - Tree-formatted output with Unicode characters
 
-Simple and functional!
+- **User Experience**:
+  - Clean, modern interface
+  - Responsive design for mobile devices
+  - Real-time analysis
+  - Sample code included
+  - Error handling and user feedback
+
+## 🌐 Deployment
+
+### Vercel Deployment (Recommended)
+This project is optimized for Vercel deployment:
+
+1. **Automatic Deployment**: Push to main branch triggers deployment
+2. **Static Site**: No server-side processing required
+3. **Fast CDN**: Global content delivery network
+4. **Custom Domain**: Easy custom domain setup
+
+### Other Hosting Options
+- **GitHub Pages**: Works with static hosting
+- **Netlify**: Drag and drop deployment
+- **Any Static Host**: No special requirements
+
+## 📖 Documentation
+
+Comprehensive documentation is available in the `project_report/` folder:
+- Complete system architecture
+- Function and class documentation
+- Development guidelines
+- API reference (for the original server-based version)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📄 License
+
+This project is open source and available under the MIT License.
