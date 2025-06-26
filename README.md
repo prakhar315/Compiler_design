@@ -8,12 +8,14 @@ A client-side web-based C code analyzer with lexical analysis and parse tree (AS
 
 ## ✨ Features
 
-- **Client-side Processing**: Runs entirely in your browser - no servers needed
-- **Lexical Analysis**: Complete C language tokenization with detailed token information
-- **Parse Tree (AST)**: Abstract Syntax Tree generation showing code structure
-- **Real-time Analysis**: Instant results as you type
-- **Mobile Friendly**: Responsive design works on all devices
-- **No Installation**: Just open and use
+- **🚀 Client-side Processing**: Runs entirely in your browser - no servers needed
+- **🔍 Enhanced Lexical Analysis**: Complete C tokenization with categorized display and emojis
+- **🌳 Advanced Parse Tree (AST)**: Detailed syntax tree with visual hierarchy and metadata
+- **⚡ Real-time Analysis**: Instant results with improved performance
+- **📱 Mobile Friendly**: Responsive design works perfectly on all devices
+- **🎨 Beautiful UI**: Enhanced visual formatting with emojis and better typography
+- **📊 Code Metrics**: Displays code statistics and analysis summary
+- **🔧 No Installation**: Just open and use - zero setup required
 
 ## 🎯 Quick Start
 
@@ -66,29 +68,33 @@ C-Code-Analyzer/
 - **Real-time Processing**: Instant analysis without server calls
 
 ### Supported C Language Features
-- **Keywords**: All C keywords (int, float, if, while, etc.)
-- **Operators**: Arithmetic, logical, comparison, assignment operators
-- **Literals**: Integer, float, string, and character literals
-- **Identifiers**: Variable and function names
-- **Comments**: Single-line (//) and multi-line (/* */) comments
-- **Preprocessor**: #include, #define directives
-- **Control Structures**: if/else, while, for loops
-- **Functions**: Function declarations and definitions
-- **Variables**: Variable declarations and assignments
+- **🔑 Keywords**: All C keywords (int, float, if, while, return, etc.)
+- **⚡ Operators**: Arithmetic, logical, comparison, assignment operators
+- **🔢 Literals**: Integer, float, string, and character literals
+- **🏷️ Identifiers**: Variable and function names with scope detection
+- **💬 Comments**: Single-line (//) and multi-line (/* */) comments
+- **🔧 Preprocessor**: #include, #define directives
+- **🔀 Control Structures**: if/else, while, for, switch statements
+- **⚙️ Functions**: Function declarations with parameter parsing
+- **📦 Variables**: Variable declarations with initialization detection
+- **📝 Expressions**: Assignment statements and function calls
 
 ## 🎨 Features
 
-- **Lexical Analysis**:
-  - Complete tokenization with token types and positions
+- **🔍 Enhanced Lexical Analysis**:
+  - Complete tokenization with categorized display
+  - Visual token classification with emojis
   - Line and column number tracking
-  - Token count summaries
-  - Detailed token listings
+  - Comprehensive token statistics
+  - Organized by token categories (Keywords, Literals, etc.)
 
-- **Parse Tree (AST)**:
-  - Hierarchical code structure visualization
-  - Function and variable identification
-  - Control flow structure detection
-  - Tree-formatted output with Unicode characters
+- **🌳 Advanced Parse Tree (AST)**:
+  - Hierarchical code structure with visual tree formatting
+  - Function parameter detection and display
+  - Variable initialization tracking
+  - Control flow structure identification
+  - Code metrics and analysis summary
+  - Enhanced tree visualization with emojis and proper connectors
 
 - **User Experience**:
   - Clean, modern interface

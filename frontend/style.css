@@ -153,6 +153,52 @@ button {
     padding: 20px;
     background-color: #fafafa;
     overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    color: #2c3e50;
+    min-height: 400px;
+}
+
+.output-display::-webkit-scrollbar {
+    width: 8px;
+}
+
+.output-display::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.output-display::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.output-display::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Enhanced output content styling */
+.output-content {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2c3e50;
+}
+
+/* Add some visual enhancements for better readability */
+.output-content::selection {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Improve spacing for tree structures */
+.output-content pre {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
 }
 
 .placeholder {
