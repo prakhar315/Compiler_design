@@ -36,17 +36,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showPlaceholder() {
         outputDisplay.innerHTML = `
-            <div class="placeholder">
-                <p>Enter C code and click "Analyze Code" to see the results</p>
-                <div class="analysis-info">
-                    <h3>Analysis Types:</h3>
-                    <ul>
-                        <li><strong>Lexical Analysis:</strong> Breaks code into tokens (keywords, identifiers, operators, literals, etc.)</li>
-                        <li><strong>Parse Tree (AST):</strong> Shows the hierarchical structure of your code with functions, variables, and control structures</li>
-                    </ul>
-                    <div style="margin-top: 15px; padding: 10px; background-color: #e8f4fd; border-radius: 5px; border-left: 4px solid #3498db;">
-                        <strong>✨ Client-side Analysis:</strong> No server required! Analysis runs directly in your browser.
+            <div class="welcome-message">
+                <div class="welcome-icon">🎯</div>
+                <h3>Welcome to C Code Analyzer</h3>
+                <p>Enter your C code and select an analysis type to get started</p>
+
+                <div class="quick-info">
+                    <div class="info-card">
+                        <div class="info-icon">🔍</div>
+                        <h4>Lexical Analysis</h4>
+                        <p>Tokenizes code into keywords, operators, identifiers, and literals with detailed categorization</p>
                     </div>
+                    <div class="info-card">
+                        <div class="info-icon">🌳</div>
+                        <h4>Parse Tree</h4>
+                        <p>Generates syntax tree following C grammar productions and compiler design principles</p>
+                    </div>
+                </div>
+
+                <div class="tech-note">
+                    <strong>✨ Client-side Analysis:</strong> No server required! Analysis runs directly in your browser using advanced JavaScript parsing algorithms.
                 </div>
             </div>
         `;

@@ -157,52 +157,124 @@ class CParser {
     constructor() {
         this.tokens = [];
         this.position = 0;
-        this.currentFunction = null;
     }
 
     parse(code) {
         const tokenizer = new CTokenizer();
         this.tokens = tokenizer.tokenize(code);
         this.position = 0;
-        this.currentFunction = null;
 
-        const ast = {
-            type: 'Program',
+        // Create proper parse tree following C grammar
+        const parseTree = {
+            type: 'program',
+            rule: 'program → translation_unit',
             children: [],
             metadata: {
                 totalLines: code.split('\n').length,
                 totalTokens: this.tokens.length,
-                functions: 0,
-                variables: 0,
-                controlStructures: 0
+                productions: 0
             }
         };
 
+        const translationUnit = this.parseTranslationUnit();
+        if (translationUnit) {
+            parseTree.children.push(translationUnit);
+        }
+
+        return parseTree;
+    }
+
+    parseTranslationUnit() {
+        // translation_unit → external_declaration*
+        const node = {
+            type: 'translation_unit',
+            rule: 'translation_unit → external_declaration*',
+            children: []
+        };
+
         while (this.position < this.tokens.length) {
-            const node = this.parseStatement();
-            if (node) {
-                ast.children.push(node);
-                this.updateMetadata(ast.metadata, node);
+            const externalDecl = this.parseExternalDeclaration();
+            if (externalDecl) {
+                node.children.push(externalDecl);
+            } else {
+                this.nextToken(); // Skip unrecognized tokens
             }
         }
 
-        return ast;
+        return node;
     }
 
-    updateMetadata(metadata, node) {
-        switch (node.type) {
-            case 'FunctionDeclaration':
-                metadata.functions++;
-                break;
-            case 'VariableDeclaration':
-                metadata.variables++;
-                break;
-            case 'IfStatement':
-            case 'WhileStatement':
-            case 'ForStatement':
-                metadata.controlStructures++;
-                break;
+    parseExternalDeclaration() {
+        // external_declaration → function_definition | declaration | preprocessor_directive
+        const token = this.currentToken();
+        if (!token) return null;
+
+        if (token.type === 'PREPROCESSOR') {
+            return this.parsePreprocessorDirective();
+        } else if (token.type === 'KEYWORD' && this.isTypeSpecifier(token.value)) {
+            // Look ahead to determine if it's a function or variable declaration
+            return this.parseDeclarationOrFunction();
         }
+
+        return null;
+    }
+
+    isTypeSpecifier(value) {
+        return ['int', 'float', 'char', 'double', 'void', 'long', 'short', 'unsigned', 'signed'].includes(value);
+    }
+
+    parsePreprocessorDirective() {
+        // preprocessor_directive → '#' directive_name [arguments]
+        const node = {
+            type: 'preprocessor_directive',
+            rule: 'preprocessor_directive → # directive_name [arguments]',
+            children: []
+        };
+
+        // Add '#' terminal
+        node.children.push(this.createTerminal('#'));
+        this.nextToken();
+
+        // Add directive name
+        if (this.currentToken()) {
+            node.children.push(this.createTerminal(this.currentToken().value));
+            this.nextToken();
+
+            // Add header file if present
+            if (this.currentToken() && this.currentToken().type === 'HEADER_FILE') {
+                node.children.push(this.createTerminal(this.currentToken().value));
+                this.nextToken();
+            }
+        }
+
+        return node;
+    }
+
+    parseDeclarationOrFunction() {
+        // Look ahead to determine if it's a function or variable
+        const savedPosition = this.position;
+
+        // Skip type specifier
+        this.nextToken();
+
+        // Check for identifier
+        if (this.currentToken() && this.currentToken().type === 'IDENTIFIER') {
+            this.nextToken();
+
+            // Check for opening parenthesis (function) or other (variable)
+            if (this.currentToken() && this.currentToken().value === '(') {
+                // It's a function
+                this.position = savedPosition;
+                return this.parseFunctionDefinition();
+            } else {
+                // It's a variable declaration
+                this.position = savedPosition;
+                return this.parseDeclaration();
+            }
+        }
+
+        this.position = savedPosition;
+        return null;
     }
 
     currentToken() {
@@ -214,15 +286,188 @@ class CParser {
         return this.currentToken();
     }
 
+    createTerminal(value) {
+        // Create a terminal node for the parse tree
+        return {
+            type: 'terminal',
+            value: value,
+            children: []
+        };
+    }
+
+    parseFunctionDefinition() {
+        // function_definition → type_specifier declarator compound_statement
+        const node = {
+            type: 'function_definition',
+            rule: 'function_definition → type_specifier declarator compound_statement',
+            children: []
+        };
+
+        // Parse type specifier
+        const typeSpec = this.parseTypeSpecifier();
+        if (typeSpec) {
+            node.children.push(typeSpec);
+        }
+
+        // Parse declarator (function name and parameters)
+        const declarator = this.parseDeclarator();
+        if (declarator) {
+            node.children.push(declarator);
+        }
+
+        // Parse compound statement (function body)
+        const compoundStmt = this.parseCompoundStatement();
+        if (compoundStmt) {
+            node.children.push(compoundStmt);
+        }
+
+        return node;
+    }
+
+    parseTypeSpecifier() {
+        // type_specifier → 'int' | 'float' | 'char' | 'double' | 'void'
+        const token = this.currentToken();
+        if (token && this.isTypeSpecifier(token.value)) {
+            const node = {
+                type: 'type_specifier',
+                rule: `type_specifier → '${token.value}'`,
+                children: [this.createTerminal(token.value)]
+            };
+            this.nextToken();
+            return node;
+        }
+        return null;
+    }
+
+    parseDeclarator() {
+        // declarator → identifier '(' parameter_list? ')'
+        const node = {
+            type: 'declarator',
+            rule: 'declarator → identifier ( parameter_list? )',
+            children: []
+        };
+
+        // Parse identifier
+        if (this.currentToken() && this.currentToken().type === 'IDENTIFIER') {
+            node.children.push(this.createTerminal(this.currentToken().value));
+            this.nextToken();
+
+            // Parse '('
+            if (this.currentToken() && this.currentToken().value === '(') {
+                node.children.push(this.createTerminal('('));
+                this.nextToken();
+
+                // Parse parameter list (optional)
+                const paramList = this.parseParameterList();
+                if (paramList) {
+                    node.children.push(paramList);
+                }
+
+                // Parse ')'
+                if (this.currentToken() && this.currentToken().value === ')') {
+                    node.children.push(this.createTerminal(')'));
+                    this.nextToken();
+                }
+            }
+        }
+
+        return node;
+    }
+
+    parseParameterList() {
+        // parameter_list → parameter_declaration (',' parameter_declaration)*
+        const node = {
+            type: 'parameter_list',
+            rule: 'parameter_list → parameter_declaration (, parameter_declaration)*',
+            children: []
+        };
+
+        // Check if we have parameters (not just void or empty)
+        if (this.currentToken() && this.currentToken().value !== ')') {
+            const param = this.parseParameterDeclaration();
+            if (param) {
+                node.children.push(param);
+
+                // Parse additional parameters
+                while (this.currentToken() && this.currentToken().value === ',') {
+                    node.children.push(this.createTerminal(','));
+                    this.nextToken();
+
+                    const nextParam = this.parseParameterDeclaration();
+                    if (nextParam) {
+                        node.children.push(nextParam);
+                    }
+                }
+            }
+        }
+
+        return node.children.length > 0 ? node : null;
+    }
+
+    parseParameterDeclaration() {
+        // parameter_declaration → type_specifier identifier?
+        const node = {
+            type: 'parameter_declaration',
+            rule: 'parameter_declaration → type_specifier identifier?',
+            children: []
+        };
+
+        // Parse type specifier
+        const typeSpec = this.parseTypeSpecifier();
+        if (typeSpec) {
+            node.children.push(typeSpec);
+
+            // Parse optional identifier
+            if (this.currentToken() && this.currentToken().type === 'IDENTIFIER') {
+                node.children.push(this.createTerminal(this.currentToken().value));
+                this.nextToken();
+            }
+        }
+
+        return node.children.length > 0 ? node : null;
+    }
+
+    parseCompoundStatement() {
+        // compound_statement → '{' statement* '}'
+        const node = {
+            type: 'compound_statement',
+            rule: 'compound_statement → { statement* }',
+            children: []
+        };
+
+        // Parse '{'
+        if (this.currentToken() && this.currentToken().value === '{') {
+            node.children.push(this.createTerminal('{'));
+            this.nextToken();
+
+            // Parse statements
+            while (this.currentToken() && this.currentToken().value !== '}') {
+                const stmt = this.parseStatement();
+                if (stmt) {
+                    node.children.push(stmt);
+                } else {
+                    this.nextToken(); // Skip unrecognized tokens
+                }
+            }
+
+            // Parse '}'
+            if (this.currentToken() && this.currentToken().value === '}') {
+                node.children.push(this.createTerminal('}'));
+                this.nextToken();
+            }
+        }
+
+        return node;
+    }
+
     parseStatement() {
+        // statement → compound_statement | expression_statement | selection_statement | iteration_statement | jump_statement | declaration
         const token = this.currentToken();
         if (!token) return null;
 
         switch (token.type) {
-            case 'PREPROCESSOR':
-                return this.parsePreprocessor();
             case 'KEYWORD':
-                if (['int', 'float', 'char', 'double', 'void', 'long', 'short', 'unsigned', 'signed'].includes(token.value)) {
+                if (this.isTypeSpecifier(token.value)) {
                     return this.parseDeclaration();
                 } else if (token.value === 'if') {
                     return this.parseIfStatement();
@@ -233,96 +478,125 @@ class CParser {
                 } else if (token.value === 'return') {
                     return this.parseReturnStatement();
                 } else if (token.value === 'break') {
-                    return this.parseBreakStatement();
+                    return this.parseJumpStatement();
                 } else if (token.value === 'continue') {
-                    return this.parseContinueStatement();
-                } else if (token.value === 'switch') {
-                    return this.parseSwitchStatement();
-                } else {
-                    this.nextToken();
-                    return null;
+                    return this.parseJumpStatement();
                 }
+                break;
             case 'IDENTIFIER':
                 return this.parseExpressionStatement();
-            default:
-                this.nextToken();
-                return null;
+            case 'DELIMITER':
+                if (token.value === '{') {
+                    return this.parseCompoundStatement();
+                }
+                break;
         }
+
+        // Skip unrecognized tokens
+        this.nextToken();
+        return null;
     }
 
-    parsePreprocessor() {
+    parseDeclaration() {
+        // declaration → type_specifier init_declarator_list ';'
         const node = {
-            type: 'Preprocessor',
-            directive: this.currentToken().value,
+            type: 'declaration',
+            rule: 'declaration → type_specifier init_declarator_list ;',
             children: []
         };
 
-        this.nextToken();
-        
-        // Parse header file if present
-        if (this.currentToken() && this.currentToken().type === 'HEADER_FILE') {
-            node.children.push({
-                type: 'HeaderFile',
-                value: this.currentToken().value,
-                children: []
-            });
-            this.nextToken();
+        // Parse type specifier
+        const typeSpec = this.parseTypeSpecifier();
+        if (typeSpec) {
+            node.children.push(typeSpec);
+
+            // Parse init declarator list
+            const initDeclList = this.parseInitDeclaratorList();
+            if (initDeclList) {
+                node.children.push(initDeclList);
+            }
+
+            // Parse ';'
+            if (this.currentToken() && this.currentToken().value === ';') {
+                node.children.push(this.createTerminal(';'));
+                this.nextToken();
+            }
         }
 
         return node;
     }
 
-    parseDeclaration() {
-        const type = this.currentToken().value;
-        this.nextToken();
+    parseInitDeclaratorList() {
+        // init_declarator_list → init_declarator (',' init_declarator)*
+        const node = {
+            type: 'init_declarator_list',
+            rule: 'init_declarator_list → init_declarator (, init_declarator)*',
+            children: []
+        };
 
-        if (this.currentToken() && this.currentToken().type === 'IDENTIFIER') {
-            const name = this.currentToken().value;
-            this.nextToken();
+        // Parse first init declarator
+        const initDecl = this.parseInitDeclarator();
+        if (initDecl) {
+            node.children.push(initDecl);
 
-            // Check if it's a function declaration
-            if (this.currentToken() && this.currentToken().value === '(') {
-                return this.parseFunction(type, name);
-            } else {
-                // Variable declaration
-                const node = {
-                    type: 'VariableDeclaration',
-                    dataType: type,
-                    name: name,
-                    value: null,
-                    children: [],
-                    line: this.currentToken() ? this.currentToken().line : 1
-                };
+            // Parse additional declarators
+            while (this.currentToken() && this.currentToken().value === ',') {
+                node.children.push(this.createTerminal(','));
+                this.nextToken();
 
-                // Check for initialization
-                if (this.currentToken() && this.currentToken().value === '=') {
-                    this.nextToken(); // Skip '='
-                    const valueToken = this.currentToken();
-                    if (valueToken) {
-                        node.value = valueToken.value;
-                        node.children.push({
-                            type: 'Initializer',
-                            value: valueToken.value,
-                            valueType: this.getValueType(valueToken),
-                            children: []
-                        });
-                        this.nextToken();
-                    }
+                const nextInitDecl = this.parseInitDeclarator();
+                if (nextInitDecl) {
+                    node.children.push(nextInitDecl);
                 }
-
-                // Skip to semicolon
-                while (this.currentToken() && this.currentToken().value !== ';') {
-                    this.nextToken();
-                }
-                if (this.currentToken() && this.currentToken().value === ';') {
-                    this.nextToken();
-                }
-
-                return node;
             }
         }
 
-        return null;
+        return node.children.length > 0 ? node : null;
+    }
+
+    parseInitDeclarator() {
+        // init_declarator → declarator ('=' initializer)?
+        const node = {
+            type: 'init_declarator',
+            rule: 'init_declarator → declarator (= initializer)?',
+            children: []
+        };
+
+        // Parse identifier (simple declarator)
+        if (this.currentToken() && this.currentToken().type === 'IDENTIFIER') {
+            node.children.push(this.createTerminal(this.currentToken().value));
+            this.nextToken();
+
+            // Parse optional initializer
+            if (this.currentToken() && this.currentToken().value === '=') {
+                node.children.push(this.createTerminal('='));
+                this.nextToken();
+
+                const initializer = this.parseInitializer();
+                if (initializer) {
+                    node.children.push(initializer);
+                }
+            }
+        }
+
+        return node.children.length > 0 ? node : null;
+    }
+
+    parseInitializer() {
+        // initializer → assignment_expression
+        const node = {
+            type: 'initializer',
+            rule: 'initializer → assignment_expression',
+            children: []
+        };
+
+        // Parse simple expression (literal or identifier)
+        if (this.currentToken()) {
+            node.children.push(this.createTerminal(this.currentToken().value));
+            this.nextToken();
+        }
+
+        return node;
     }
 
     getValueType(token) {
@@ -336,101 +610,226 @@ class CParser {
         }
     }
 
-    parseFunction(returnType, name) {
+    parseIfStatement() {
+        // selection_statement → 'if' '(' expression ')' statement ('else' statement)?
         const node = {
-            type: 'FunctionDeclaration',
-            returnType: returnType,
-            name: name,
-            parameters: [],
-            children: [],
-            line: this.currentToken() ? this.currentToken().line : 1
-        };
-
-        this.currentFunction = name;
-
-        // Parse parameters
-        if (this.currentToken() && this.currentToken().value === '(') {
-            this.nextToken(); // Skip '('
-
-            while (this.currentToken() && this.currentToken().value !== ')') {
-                if (this.currentToken().type === 'KEYWORD' &&
-                    ['int', 'float', 'char', 'double', 'void'].includes(this.currentToken().value)) {
-                    const paramType = this.currentToken().value;
-                    this.nextToken();
-
-                    if (this.currentToken() && this.currentToken().type === 'IDENTIFIER') {
-                        const paramName = this.currentToken().value;
-                        node.parameters.push({
-                            type: paramType,
-                            name: paramName
-                        });
-                        this.nextToken();
-                    }
-                }
-
-                if (this.currentToken() && this.currentToken().value === ',') {
-                    this.nextToken(); // Skip comma
-                }
-
-                // Safety check to avoid infinite loop
-                if (this.currentToken() &&
-                    this.currentToken().type !== 'KEYWORD' &&
-                    this.currentToken().value !== ')' &&
-                    this.currentToken().value !== ',') {
-                    this.nextToken();
-                }
-            }
-
-            if (this.currentToken() && this.currentToken().value === ')') {
-                this.nextToken(); // Skip ')'
-            }
-        }
-
-        // Add parameters as children for display
-        if (node.parameters.length > 0) {
-            node.children.push({
-                type: 'ParameterList',
-                parameters: node.parameters,
-                children: []
-            });
-        }
-
-        // Parse function body
-        if (this.currentToken() && this.currentToken().value === '{') {
-            const body = this.parseBlock();
-            if (body) {
-                node.children.push(body);
-            }
-        }
-
-        this.currentFunction = null;
-        return node;
-    }
-
-    parseBlock() {
-        if (!this.currentToken() || this.currentToken().value !== '{') {
-            return null;
-        }
-
-        const node = {
-            type: 'Block',
+            type: 'selection_statement',
+            rule: 'selection_statement → if ( expression ) statement (else statement)?',
             children: []
         };
 
-        this.nextToken(); // Skip '{'
+        // Parse 'if'
+        node.children.push(this.createTerminal('if'));
+        this.nextToken();
 
-        while (this.currentToken() && this.currentToken().value !== '}') {
-            const stmt = this.parseStatement();
-            if (stmt) {
-                node.children.push(stmt);
+        // Parse '('
+        if (this.currentToken() && this.currentToken().value === '(') {
+            node.children.push(this.createTerminal('('));
+            this.nextToken();
+
+            // Parse expression (simplified)
+            const expr = this.parseExpression();
+            if (expr) {
+                node.children.push(expr);
+            }
+
+            // Parse ')'
+            if (this.currentToken() && this.currentToken().value === ')') {
+                node.children.push(this.createTerminal(')'));
+                this.nextToken();
             }
         }
 
-        if (this.currentToken() && this.currentToken().value === '}') {
-            this.nextToken(); // Skip '}'
+        // Parse statement
+        const stmt = this.parseStatement();
+        if (stmt) {
+            node.children.push(stmt);
+        }
+
+        // Parse optional 'else' clause
+        if (this.currentToken() && this.currentToken().value === 'else') {
+            node.children.push(this.createTerminal('else'));
+            this.nextToken();
+
+            const elseStmt = this.parseStatement();
+            if (elseStmt) {
+                node.children.push(elseStmt);
+            }
         }
 
         return node;
+    }
+
+    parseWhileStatement() {
+        // iteration_statement → 'while' '(' expression ')' statement
+        const node = {
+            type: 'iteration_statement',
+            rule: 'iteration_statement → while ( expression ) statement',
+            children: []
+        };
+
+        // Parse 'while'
+        node.children.push(this.createTerminal('while'));
+        this.nextToken();
+
+        // Parse condition
+        this.parseParenthesizedExpression(node);
+
+        // Parse body
+        const body = this.parseStatement();
+        if (body) {
+            node.children.push(body);
+        }
+
+        return node;
+    }
+
+    parseForStatement() {
+        // iteration_statement → 'for' '(' expression? ';' expression? ';' expression? ')' statement
+        const node = {
+            type: 'iteration_statement',
+            rule: 'iteration_statement → for ( expression? ; expression? ; expression? ) statement',
+            children: []
+        };
+
+        // Parse 'for'
+        node.children.push(this.createTerminal('for'));
+        this.nextToken();
+
+        // Skip the entire for condition for simplicity
+        let parenCount = 0;
+        while (this.currentToken()) {
+            if (this.currentToken().value === '(') parenCount++;
+            if (this.currentToken().value === ')') parenCount--;
+            node.children.push(this.createTerminal(this.currentToken().value));
+            this.nextToken();
+            if (parenCount === 0) break;
+        }
+
+        // Parse body
+        const body = this.parseStatement();
+        if (body) {
+            node.children.push(body);
+        }
+
+        return node;
+    }
+
+    parseReturnStatement() {
+        // jump_statement → 'return' expression? ';'
+        const node = {
+            type: 'jump_statement',
+            rule: 'jump_statement → return expression? ;',
+            children: []
+        };
+
+        // Parse 'return'
+        node.children.push(this.createTerminal('return'));
+        this.nextToken();
+
+        // Parse optional expression
+        if (this.currentToken() && this.currentToken().value !== ';') {
+            const expr = this.parseExpression();
+            if (expr) {
+                node.children.push(expr);
+            }
+        }
+
+        // Parse ';'
+        if (this.currentToken() && this.currentToken().value === ';') {
+            node.children.push(this.createTerminal(';'));
+            this.nextToken();
+        }
+
+        return node;
+    }
+
+    parseJumpStatement() {
+        // jump_statement → 'break' ';' | 'continue' ';'
+        const node = {
+            type: 'jump_statement',
+            rule: `jump_statement → ${this.currentToken().value} ;`,
+            children: []
+        };
+
+        // Parse 'break' or 'continue'
+        node.children.push(this.createTerminal(this.currentToken().value));
+        this.nextToken();
+
+        // Parse ';'
+        if (this.currentToken() && this.currentToken().value === ';') {
+            node.children.push(this.createTerminal(';'));
+            this.nextToken();
+        }
+
+        return node;
+    }
+
+    parseExpressionStatement() {
+        // expression_statement → expression? ';'
+        const node = {
+            type: 'expression_statement',
+            rule: 'expression_statement → expression? ;',
+            children: []
+        };
+
+        // Parse expression if present
+        if (this.currentToken() && this.currentToken().value !== ';') {
+            const expr = this.parseExpression();
+            if (expr) {
+                node.children.push(expr);
+            }
+        }
+
+        // Parse ';'
+        if (this.currentToken() && this.currentToken().value === ';') {
+            node.children.push(this.createTerminal(';'));
+            this.nextToken();
+        }
+
+        return node;
+    }
+
+    parseExpression() {
+        // expression → assignment_expression
+        const node = {
+            type: 'expression',
+            rule: 'expression → assignment_expression',
+            children: []
+        };
+
+        // Simple expression parsing - collect tokens until delimiter
+        const tokens = [];
+        while (this.currentToken() &&
+               ![')', ';', ',', '}'].includes(this.currentToken().value)) {
+            tokens.push(this.currentToken().value);
+            this.nextToken();
+        }
+
+        if (tokens.length > 0) {
+            // Create a simple expression node
+            node.children.push(this.createTerminal(tokens.join(' ')));
+        }
+
+        return node.children.length > 0 ? node : null;
+    }
+
+    parseParenthesizedExpression(parentNode) {
+        // Helper to parse '(' expression ')'
+        if (this.currentToken() && this.currentToken().value === '(') {
+            parentNode.children.push(this.createTerminal('('));
+            this.nextToken();
+
+            const expr = this.parseExpression();
+            if (expr) {
+                parentNode.children.push(expr);
+            }
+
+            if (this.currentToken() && this.currentToken().value === ')') {
+                parentNode.children.push(this.createTerminal(')'));
+                this.nextToken();
+            }
+        }
     }
 
     parseIfStatement() {
@@ -621,26 +1020,35 @@ class CParser {
         return node;
     }
 
-    formatAST(ast, indent = 0) {
-        let output = "🌳 Parse Tree (Abstract Syntax Tree)\n";
+    formatAST(parseTree, indent = 0) {
+        let output = "🌳 Parse Tree (Syntax Analysis)\n";
         output += "=".repeat(50) + "\n\n";
 
         // Add metadata summary
-        if (ast.metadata) {
-            output += "📊 Code Analysis Summary:\n";
-            output += "─".repeat(25) + "\n";
-            output += `📄 Total Lines: ${ast.metadata.totalLines}\n`;
-            output += `🔤 Total Tokens: ${ast.metadata.totalTokens}\n`;
-            output += `⚙️  Functions: ${ast.metadata.functions}\n`;
-            output += `📦 Variables: ${ast.metadata.variables}\n`;
-            output += `🔀 Control Structures: ${ast.metadata.controlStructures}\n\n`;
+        if (parseTree.metadata) {
+            output += "📊 Grammar Analysis Summary:\n";
+            output += "─".repeat(30) + "\n";
+            output += `📄 Total Lines: ${parseTree.metadata.totalLines}\n`;
+            output += `🔤 Total Tokens: ${parseTree.metadata.totalTokens}\n`;
+            output += `📝 Grammar Productions Used: ${this.countProductions(parseTree)}\n\n`;
         }
 
-        output += "🏗️  Program Structure:\n";
-        output += "─".repeat(25) + "\n";
-        output += this.formatNode(ast, indent);
+        output += "🏗️ Parse Tree Structure:\n";
+        output += "─".repeat(30) + "\n";
+        output += "Grammar: C Language Context-Free Grammar\n\n";
+        output += this.formatNode(parseTree, indent);
 
         return output;
+    }
+
+    countProductions(node) {
+        let count = node.rule ? 1 : 0;
+        if (node.children) {
+            node.children.forEach(child => {
+                count += this.countProductions(child);
+            });
+        }
+        return count;
     }
 
     formatNode(node, indent = 0, isLast = true) {
@@ -654,67 +1062,16 @@ class CParser {
             output += spaces + (isLast ? "└── " : "├── ");
         }
 
-        switch (node.type) {
-            case 'Program':
-                output += "📋 Program\n";
-                break;
-            case 'Preprocessor':
-                output += `🔧 Preprocessor: ${node.directive}\n`;
-                break;
-            case 'HeaderFile':
-                output += `📁 Header: ${node.value}\n`;
-                break;
-            case 'FunctionDeclaration':
-                const params = node.parameters && node.parameters.length > 0
-                    ? node.parameters.map(p => `${p.type} ${p.name}`).join(', ')
-                    : 'void';
-                output += `⚙️  Function: ${node.returnType} ${node.name}(${params})\n`;
-                break;
-            case 'ParameterList':
-                output += `📝 Parameters (${node.parameters.length})\n`;
-                break;
-            case 'VariableDeclaration':
-                const valueInfo = node.value ? ` = ${node.value}` : '';
-                output += `📦 Variable: ${node.dataType} ${node.name}${valueInfo}\n`;
-                break;
-            case 'Initializer':
-                output += `🔢 Value: ${node.value} (${node.valueType})\n`;
-                break;
-            case 'Block':
-                output += `🏗️  Block (${node.children.length} statements)\n`;
-                break;
-            case 'IfStatement':
-                output += "🔀 If Statement\n";
-                break;
-            case 'WhileStatement':
-                output += "🔄 While Loop\n";
-                break;
-            case 'ForStatement':
-                output += "🔁 For Loop\n";
-                break;
-            case 'ReturnStatement':
-                output += "↩️  Return Statement\n";
-                break;
-            case 'ExpressionStatement':
-                output += `💭 Expression: ${node.expression || 'unknown'}\n`;
-                break;
-            case 'Assignment':
-                output += `📝 Assignment: ${node.variable} = ${node.value}\n`;
-                break;
-            case 'FunctionCall':
-                output += `📞 Function Call: ${node.function}()\n`;
-                break;
-            case 'BreakStatement':
-                output += "🛑 Break Statement\n";
-                break;
-            case 'ContinueStatement':
-                output += "⏭️  Continue Statement\n";
-                break;
-            case 'SwitchStatement':
-                output += "🔀 Switch Statement\n";
-                break;
-            default:
-                output += `❓ ${node.type}\n`;
+        // Display grammar productions for non-terminals
+        if (node.type === 'terminal') {
+            output += `"${node.value}"\n`;
+        } else {
+            // Non-terminal with grammar rule
+            output += `${node.type}`;
+            if (node.rule) {
+                output += ` [${node.rule}]`;
+            }
+            output += "\n";
         }
 
         // Format children with proper tree structure
@@ -722,8 +1079,17 @@ class CParser {
             node.children.forEach((child, childIndex) => {
                 const isLastChild = childIndex === node.children.length - 1;
                 const childSpaces = isLast ? "    " : "│   ";
-                output += spaces + childSpaces.substring(0, 2) +
-                         this.formatNode(child, indent + 1, isLastChild).substring(spaces.length + 4);
+                const childOutput = this.formatNode(child, indent + 1, isLastChild);
+
+                // Properly indent child output
+                const lines = childOutput.split('\n');
+                lines.forEach((line, lineIndex) => {
+                    if (line.trim() && lineIndex === 0) {
+                        output += spaces + childSpaces + line.substring(spaces.length + 4) + "\n";
+                    } else if (line.trim() && lineIndex > 0) {
+                        output += spaces + (isLast ? "    " : "│   ") + line.substring(spaces.length + 4) + "\n";
+                    }
+                });
             });
         }
 
